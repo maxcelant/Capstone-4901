@@ -68,43 +68,47 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            flash = !flash;
-                          });
-                          flash
-                              ? _controller.setFlashMode(FlashMode.always)
-                              : _controller.setFlashMode(FlashMode.off);
-                        },
-                        icon: flash
-                            ? Icon(Icons.flash_on)
-                            : Icon(Icons.flash_off),
-                        color: Color(0xFFb3b3b3),
-                        splashColor: Color(0xFF8a8a8a),
-                        iconSize: 24,
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          try {
-                            await _initializedControllerFuture;
-                            final image = await _controller.takePicture();
-                            if (!mounted) return;
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => DisplayPictureScreen(
-                                  imagePath: image.path,
-                                ),
-                              ),
-                            );
-                          } catch (e) {
-                            // print(e);
-                          }
-                        },
-                        icon: Icon(Icons.camera_alt),
-                        color: Color(0xFFb3b3b3),
-                        iconSize: 24,
-                      ),
+                      Semantics(
+                          label: (flash) ? "flash on" : "flash off",
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                flash = !flash;
+                              });
+                              flash
+                                  ? _controller.setFlashMode(FlashMode.always)
+                                  : _controller.setFlashMode(FlashMode.off);
+                            },
+                            icon: flash
+                                ? Icon(Icons.flash_on)
+                                : Icon(Icons.flash_off),
+                            color: Color(0xFFb3b3b3),
+                            splashColor: Color(0xFF8a8a8a),
+                            iconSize: 24,
+                          )),
+                      Semantics(
+                          label: "Take picture",
+                          child: IconButton(
+                            onPressed: () async {
+                              try {
+                                await _initializedControllerFuture;
+                                final image = await _controller.takePicture();
+                                if (!mounted) return;
+                                await Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DisplayPictureScreen(
+                                      imagePath: image.path,
+                                    ),
+                                  ),
+                                );
+                              } catch (e) {
+                                // print(e);
+                              }
+                            },
+                            icon: Icon(Icons.camera_alt),
+                            color: Color(0xFFb3b3b3),
+                            iconSize: 24,
+                          )),
                     ],
                   )
                 ],
@@ -123,6 +127,13 @@ class DisplayPictureScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Display the Picture'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.save_alt),
+            iconSize: 30,
+          )
+        ],
         backgroundColor: Color(0xFFbebebe),
       ),
       // The image is stored as a file on the device
