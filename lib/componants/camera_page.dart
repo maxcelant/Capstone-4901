@@ -126,7 +126,7 @@ class DisplayPictureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Display the Picture'),
+        title: const Text('Display then Picture'),
         actions: [
           IconButton(
             onPressed: () {},
