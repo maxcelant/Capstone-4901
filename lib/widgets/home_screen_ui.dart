@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/home_screen.dart';
 import '../widgets/camera_processor.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -95,27 +96,6 @@ class HomeScreenUI {
         iconSize: 40,
         tooltip: "Menu options",
       ),
-    );
-  }
-
-  Column takeImageButton(
-      Future<void> Function(ImageSource, BuildContext) onImageButtonPressed,
-      BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 16.0),
-          child: FloatingActionButton(
-            onPressed: () {
-              onImageButtonPressed(ImageSource.camera, context);
-            },
-            heroTag: 'image2',
-            tooltip: 'Take a Photo',
-            child: const Icon(Icons.camera_alt),
-          ),
-        ),
-      ],
     );
   }
 }
