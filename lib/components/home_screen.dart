@@ -32,12 +32,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Crops the image (refactor later)
   Future<void> cropFile() async {
-    debugPrint('Is this running hello?');
     CroppedFile? croppedFile = await cameraProcessor.getCroppedFile(context);
     if (croppedFile != null) {
       File file = File(croppedFile.path);
       setState(() {
-        cameraProcessor.setImageFileListFromFile(file);
+        cameraProcessor.setImage(file);
         cameraProcessor.handlePreview();
       });
     }
@@ -48,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final XFile? pickedFile = await cameraProcessor.pickImage(source);
     File file = File(pickedFile!.path);
     setState(() {
-      cameraProcessor.setImageFileListFromFile(file);
+      cameraProcessor.setImage(file);
     });
   }
 
@@ -97,7 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
     } else if (state == AppState.identify) {
       state = AppState.done;
       return FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          //! TensorFlowLite id
+        },
         heroTag: 'image2',
         tooltip: 'Identifying',
         child: const Icon(Icons.search),

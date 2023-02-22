@@ -18,7 +18,7 @@ class CameraProcessor {
     return _imageFile;
   }
 
-  void setImageFileListFromFile(File? img) {
+  void setImage(File? img) {
     _imageFile = img;
   }
 
@@ -115,7 +115,7 @@ class CameraProcessor {
         uiSettings: [
           AndroidUiSettings(
               toolbarTitle: 'Cropper',
-              toolbarColor: Colors.deepOrange,
+              toolbarColor: Color.fromARGB(255, 17, 85, 195),
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false),
