@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/home_screen.dart';
-import '../widgets/camera_processor.dart';
-import 'package:image_picker/image_picker.dart';
 
-class HomeScreenUI {
+class HomeScreenView {
   Image appLogo() {
     return const Image(
       image: AssetImage('asset/trans_logo.png'),

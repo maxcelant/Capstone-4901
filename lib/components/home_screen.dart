@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'dart:io';
 
-import '../widgets/home_screen_ui.dart';
+import '../widgets/home_screen_view.dart';
 import '../widgets/camera_processor.dart';
 
 enum AppState { camera, crop, identify, done }
@@ -22,24 +21,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late AppState state;
   var cameraProcessor = CameraProcessor();
-  var homeScreenUI = HomeScreenUI();
+  var view = HomeScreenView();
 
   @override
   void initState() {
     super.initState();
     state = AppState.camera;
-  }
-
-  // Crops the image (refactor later)
-  Future<void> cropFile() async {
-    CroppedFile? croppedFile = await cameraProcessor.getCroppedFile(context);
-    if (croppedFile != null) {
-      File file = File(croppedFile.path);
-      setState(() {
-        cameraProcessor.setImage(file);
-        cameraProcessor.handlePreview();
-      });
-    }
   }
 
   Future<void> onImageButtonPressed(
@@ -49,6 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       cameraProcessor.setImage(file);
     });
+  }
+
+  // Crops the image (refactor later)
+  Future<void> onCropButtonPressed() async {
+    CroppedFile? croppedFile = await cameraProcessor.getCroppedFile(context);
+    if (croppedFile != null) {
+      File file = File(croppedFile.path);
+      setState(() {
+        cameraProcessor.setImage(file);
+        cameraProcessor.handlePreview();
+      });
+    }
   }
 
   //Retrieves lost images and updates file list accordingly
@@ -70,9 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
   }
 
-  FloatingActionButton _actionButton(
-      Future<void> Function(ImageSource, BuildContext) onImageButtonPressed,
-      BuildContext context) {
+  FloatingActionButton _actionButton() {
     if (state == AppState.camera) {
       state = AppState.crop;
       return FloatingActionButton(
@@ -80,14 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
           onImageButtonPressed(ImageSource.camera, context);
         },
         heroTag: 'image2',
-        tooltip: 'Take a Photo',
-        child: const Icon(Icons.camera_alt),
+        tooltip: 'Take Photo',
+        child: const Icon(Icons.camera),
       );
     } else if (state == AppState.crop) {
       state = AppState.identify;
       return FloatingActionButton(
         onPressed: () {
-          cropFile();
+          onCropButtonPressed();
         },
         heroTag: 'image2',
         tooltip: 'Crop Photo',
@@ -117,19 +114,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: homeScreenUI.helpButton(context),
+        leading: view.helpButton(context),
         leadingWidth: 75,
         toolbarHeight: 100,
-        title: homeScreenUI.appLogo(),
+        title: view.appLogo(),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         actions: [
-          homeScreenUI.menuOptions(context),
+          view.menuOptions(context),
         ],
       ),
       body: cameraProcessor.displayImageOnScreen(retrieveLostData),
-      floatingActionButton: _actionButton(onImageButtonPressed, context),
+      floatingActionButton: _actionButton(),
     );
   }
 }
