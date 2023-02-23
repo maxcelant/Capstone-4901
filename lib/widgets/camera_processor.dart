@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:io';
 
 class CameraProcessor {
-  File? _imageFile;
+  File? _imageFile; // user's picture
   dynamic _pickImageError;
   bool isVideo = false;
   String? _retrieveDataError;

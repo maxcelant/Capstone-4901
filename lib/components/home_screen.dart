@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // TODO: figure this out
   //Retrieves lost images and updates file list accordingly
   Future<void> retrieveLostData() async {
     // final LostDataResponse response = await cameraProcessor.getLostData();
