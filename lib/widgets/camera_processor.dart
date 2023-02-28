@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app_2/classes/brick_identifier.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
-import '../components/home_screen.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:image/image.dart' as img;
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -13,6 +13,7 @@ class CameraProcessor {
   bool isVideo = false;
   String? _retrieveDataError;
   final ImagePicker _picker = ImagePicker();
+  BrickIdentifier brickIdentifier = BrickIdentifier();
 
   File? getImage() {
     return _imageFile;
@@ -139,5 +140,16 @@ class CameraProcessor {
       );
     }
     return null;
+  }
+
+  Future<img.Image?> fileToImage() async {
+    final bytes = await _imageFile!.readAsBytes();
+    final img.Image? image = img.decodeImage(bytes);
+    return image;
+  }
+
+  void predictImage() async {
+    img.Image image = (await fileToImage()) as img.Image;
+    brickIdentifier.predict(image);
   }
 }

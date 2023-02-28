@@ -91,6 +91,9 @@ class BrickIdentifier {
         .getMapWithFloatValue();
     final pred = getTopProbability(labeledProb);
 
+    print(pred.key);
+    print(pred.value);
+
     return Category(pred.key, pred.value);
   }
 

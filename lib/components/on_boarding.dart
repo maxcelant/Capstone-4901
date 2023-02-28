@@ -25,7 +25,7 @@ class OnBoarding extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Image(image: AssetImage('asset/trans_logo.png')),
+                    const Image(image: AssetImage('assets/trans_logo.png')),
                     Text(
                       "Welcome to Brix Color Finder",
                       style: Theme.of(context).textTheme.headline3,

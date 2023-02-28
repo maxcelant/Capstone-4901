@@ -92,10 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.crop),
       );
     } else if (state == AppState.identify) {
-      state = AppState.done;
+      state = AppState.camera;
       return FloatingActionButton(
         onPressed: () {
-          //! TensorFlowLite id
+          cameraProcessor.predictImage();
         },
         heroTag: 'image2',
         tooltip: 'Identifying',
