@@ -19,6 +19,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = false;
+  late String predictedLegoName = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -70,43 +72,118 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
   }
 
-  FloatingActionButton _actionButton() {
+  ElevatedButton _actionButton() {
     if (state == AppState.camera) {
       state = AppState.crop;
-      return FloatingActionButton(
+      return ElevatedButton(
         onPressed: () {
           onImageButtonPressed(ImageSource.camera, context);
         },
-        heroTag: 'image2',
-        tooltip: 'Take Photo',
-        child: const Icon(Icons.camera),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            const Icon(
+              Icons.camera,
+              size: 40,
+            ),
+            const SizedBox(
+                width: 20.0), // Add some space between the icon and text
+            const Text(
+              'Take Photo',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       );
     } else if (state == AppState.crop) {
       state = AppState.identify;
-      return FloatingActionButton(
+      return ElevatedButton(
         onPressed: () {
           onCropButtonPressed();
         },
-        heroTag: 'image2',
-        tooltip: 'Crop Photo',
-        child: const Icon(Icons.crop),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            const Icon(
+              Icons.crop,
+              size: 40,
+            ),
+            const SizedBox(
+                width: 20.0), // Add some space between the icon and text
+            const Text(
+              'Crop Photo',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       );
     } else if (state == AppState.identify) {
       state = AppState.camera;
-      return FloatingActionButton(
-        onPressed: () {
-          cameraProcessor.predictImage();
+      return ElevatedButton(
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+          String brickName = await cameraProcessor.predictImage();
+          setState(() {
+            predictedLegoName = brickName;
+            isLoading = false;
+          });
         },
-        heroTag: 'image2',
-        tooltip: 'Identifying',
-        child: const Icon(Icons.search),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            const Icon(
+              Icons.search,
+              size: 40,
+            ),
+            const SizedBox(
+                width: 20.0), // Add some space between the icon and text
+            const Text(
+              'Identify Brick',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       );
     } else {
-      return FloatingActionButton(
+      return ElevatedButton(
         onPressed: () {},
-        heroTag: 'image2',
-        tooltip: 'Done',
-        child: const Icon(Icons.check),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            const Icon(
+              Icons.check,
+              size: 40,
+            ),
+            const SizedBox(
+                width: 20.0), // Add some space between the icon and text
+            const Text(
+              'Finish',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       );
     }
   }
@@ -126,8 +203,40 @@ class _MyHomePageState extends State<MyHomePage> {
           view.menuOptions(context),
         ],
       ),
-      body: cameraProcessor.displayImageOnScreen(retrieveLostData),
-      floatingActionButton: _actionButton(),
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                cameraProcessor.displayImageOnScreen(retrieveLostData),
+                isLoading
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        predictedLegoName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: 100,
+            padding: const EdgeInsets.all(16.0),
+            child: Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(30.0),
+              child: _actionButton(),
+            ),
+          )
+        ],
+      ),
+      // floatingActionButton: _actionButton(),
     );
   }
 }

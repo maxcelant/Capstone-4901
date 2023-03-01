@@ -44,7 +44,10 @@ class CameraProcessor {
     if (_imageFile != null) {
       return Semantics(
         label: 'image_picker_example_picked_images',
-        child: Image.file(_imageFile as File),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.file(_imageFile as File),
+        ),
       );
     } else if (_pickImageError != null) {
       return Text(
@@ -148,8 +151,8 @@ class CameraProcessor {
     return image;
   }
 
-  void predictImage() async {
+  Future<String> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
-    brickIdentifier.predict(image);
+    return brickIdentifier.predict(image);
   }
 }

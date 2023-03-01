@@ -79,7 +79,7 @@ class BrickIdentifier {
         .process(_inputImage);
   }
 
-  Category predict(Image image) {
+  String predict(Image image) {
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
     _inputImage = _preProcess();
@@ -94,7 +94,8 @@ class BrickIdentifier {
     print(pred.key);
     print(pred.value);
 
-    return Category(pred.key, pred.value);
+    return pred.key;
+    // return Category(pred.key, pred.value);
   }
 
   void close() {
