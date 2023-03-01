@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else if (state == AppState.crop) {
       return _cropPictureButton();
     } else if (state == AppState.identify) {
-      return _takePictureButton(); // Add color detection here
+      return _identifyBrickButton(); // Add color detection here
     } else {
       return _finishedButton();
     }
