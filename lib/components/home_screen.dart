@@ -74,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ElevatedButton _actionButton() {
     if (state == AppState.camera) {
-      state = AppState.crop;
       return ElevatedButton(
         onPressed: () {
           onImageButtonPressed(ImageSource.camera, context);
+          state = AppState.crop;
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -101,10 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     } else if (state == AppState.crop) {
-      state = AppState.identify;
       return ElevatedButton(
         onPressed: () {
           onCropButtonPressed();
+          state = AppState.identify;
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -128,7 +128,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     } else if (state == AppState.identify) {
-      state = AppState.camera;
       return ElevatedButton(
         onPressed: () async {
           setState(() {
@@ -139,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
             predictedLegoName = brickName;
             isLoading = false;
           });
+          state = AppState.camera;
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +163,9 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     } else {
       return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          state = AppState.camera;
+        },
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           // ignore: prefer_const_literals_to_create_immutables
