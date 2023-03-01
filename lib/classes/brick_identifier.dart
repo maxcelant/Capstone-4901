@@ -94,7 +94,7 @@ class BrickIdentifier {
     print(pred.key);
     print(pred.value);
 
-    return pred.key;
+    return pred.key; // returns name of the brick
     // return Category(pred.key, pred.value);
   }
 

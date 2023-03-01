@@ -109,6 +109,7 @@ class CameraProcessor {
     return null;
   }
 
+  // Widget for cropping the image
   Future<CroppedFile?> getCroppedFile(BuildContext context) async {
     File? image = getImage();
     if (image != null) {
@@ -145,12 +146,14 @@ class CameraProcessor {
     return null;
   }
 
+  // Performs the decoding of File type to Image type
   Future<img.Image?> fileToImage() async {
     final bytes = await _imageFile!.readAsBytes();
     final img.Image? image = img.decodeImage(bytes);
     return image;
   }
 
+  // Processes the file and then returns the name of the brick
   Future<String> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
