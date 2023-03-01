@@ -72,121 +72,137 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
   }
 
+  ElevatedButton _takePictureButton() {
+    return ElevatedButton(
+      onPressed: () {
+        onImageButtonPressed(ImageSource.camera, context);
+        state = AppState.crop;
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Icon(
+            Icons.camera,
+            size: 40,
+          ),
+          const SizedBox(
+              width: 20.0), // Add some space between the icon and text
+          const Text(
+            'Take Photo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ElevatedButton _cropPictureButton() {
+    return ElevatedButton(
+      onPressed: () {
+        onCropButtonPressed();
+        state = AppState.identify;
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Icon(
+            Icons.crop,
+            size: 40,
+          ),
+          const SizedBox(
+              width: 20.0), // Add some space between the icon and text
+          const Text(
+            'Crop Photo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ElevatedButton _identifyBrickButton() {
+    return ElevatedButton(
+      onPressed: () async {
+        setState(() {
+          isLoading = true;
+        });
+        String brickName = await cameraProcessor.predictImage();
+        setState(() {
+          predictedLegoName = brickName;
+          isLoading = false;
+        });
+        state = AppState.camera;
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Icon(
+            Icons.search,
+            size: 40,
+          ),
+          const SizedBox(
+              width: 20.0), // Add some space between the icon and text
+          const Text(
+            'Identify Brick',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ElevatedButton _finishedButton() {
+    return ElevatedButton(
+      onPressed: () {
+        state = AppState.camera;
+      },
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Icon(
+            Icons.check,
+            size: 40,
+          ),
+          const SizedBox(
+              width: 20.0), // Add some space between the icon and text
+          const Text(
+            'Finish',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   ElevatedButton _actionButton() {
     if (state == AppState.camera) {
-      return ElevatedButton(
-        onPressed: () {
-          onImageButtonPressed(ImageSource.camera, context);
-          state = AppState.crop;
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Icon(
-              Icons.camera,
-              size: 40,
-            ),
-            const SizedBox(
-                width: 20.0), // Add some space between the icon and text
-            const Text(
-              'Take Photo',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      );
+      return _takePictureButton();
     } else if (state == AppState.crop) {
-      return ElevatedButton(
-        onPressed: () {
-          onCropButtonPressed();
-          state = AppState.identify;
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Icon(
-              Icons.crop,
-              size: 40,
-            ),
-            const SizedBox(
-                width: 20.0), // Add some space between the icon and text
-            const Text(
-              'Crop Photo',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      );
+      return _cropPictureButton();
     } else if (state == AppState.identify) {
-      return ElevatedButton(
-        onPressed: () async {
-          setState(() {
-            isLoading = true;
-          });
-          String brickName = await cameraProcessor.predictImage();
-          setState(() {
-            predictedLegoName = brickName;
-            isLoading = false;
-          });
-          state = AppState.camera;
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Icon(
-              Icons.search,
-              size: 40,
-            ),
-            const SizedBox(
-                width: 20.0), // Add some space between the icon and text
-            const Text(
-              'Identify Brick',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      );
+      return _takePictureButton(); // Add color detection here
     } else {
-      return ElevatedButton(
-        onPressed: () {
-          state = AppState.camera;
-        },
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Icon(
-              Icons.check,
-              size: 40,
-            ),
-            const SizedBox(
-                width: 20.0), // Add some space between the icon and text
-            const Text(
-              'Finish',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      );
+      return _finishedButton();
     }
   }
 
