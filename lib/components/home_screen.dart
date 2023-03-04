@@ -77,6 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         onImageButtonPressed(ImageSource.camera, context);
         state = AppState.crop;
+        // setState(() {
+        //   predictedLegoName = "";
+        // });
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -228,17 +231,15 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 cameraProcessor.displayImageOnScreen(retrieveLostData),
-                isLoading
-                    ? const CircularProgressIndicator()
-                    : Text(
-                        predictedLegoName,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                Text(
+                  predictedLegoName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),

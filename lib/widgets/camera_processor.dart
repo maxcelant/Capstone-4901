@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -55,9 +56,17 @@ class CameraProcessor {
         textAlign: TextAlign.center,
       );
     } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
+      return Column(
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Text(
+            'You have not yet picked an image.',
+            textAlign: TextAlign.center,
+          ),
+          const Image(
+            image: AssetImage('assets/unidentified_lego.png'),
+          )
+        ],
       );
     }
   }
@@ -75,9 +84,18 @@ class CameraProcessor {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
-                    return const Text(
-                      'You have not yet picked an image.',
-                      textAlign: TextAlign.center,
+                    return Column(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          'Loading...',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w800),
+                        ),
+                        const Image(
+                          image: AssetImage('assets/unidentified_lego.png'),
+                        )
+                      ],
                     );
                   case ConnectionState.done:
                     return handlePreview();
@@ -88,9 +106,17 @@ class CameraProcessor {
                         textAlign: TextAlign.center,
                       );
                     } else {
-                      return const Text(
-                        'You have not yet picked an image.',
-                        textAlign: TextAlign.center,
+                      return Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'You have not yet picked an image.',
+                            textAlign: TextAlign.center,
+                          ),
+                          const Image(
+                            image: AssetImage('assets/unidentified_lego.png'),
+                          )
+                        ],
                       );
                     }
                 }
