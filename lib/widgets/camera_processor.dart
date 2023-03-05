@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -47,21 +46,47 @@ class CameraProcessor {
         label: 'image_picker_example_picked_images',
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.file(_imageFile as File),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(_imageFile as File)),
+          ),
         ),
       );
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
         textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontFamily: 'WorkSans',
+        ),
       );
     } else {
       return Column(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const Text(
-            'You have not yet picked an image.',
-            textAlign: TextAlign.center,
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'You have not yet picked an image.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'WorkSans',
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+              ),
+            ),
           ),
           const Image(
             image: AssetImage('assets/unidentified_lego.png'),
@@ -90,7 +115,10 @@ class CameraProcessor {
                         const Text(
                           'Loading...',
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w800),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         const Image(
                           image: AssetImage('assets/unidentified_lego.png'),
@@ -146,7 +174,7 @@ class CameraProcessor {
         uiSettings: [
           AndroidUiSettings(
               toolbarTitle: 'Cropper',
-              toolbarColor: Color.fromARGB(255, 17, 85, 195),
+              toolbarColor: Colors.orange,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false),

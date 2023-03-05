@@ -81,6 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
         //   predictedLegoName = "";
         // });
       },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -95,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             'Take Photo',
             textAlign: TextAlign.center,
             style: TextStyle(
+              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -110,6 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onCropButtonPressed();
         state = AppState.identify;
       },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -124,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             'Crop Photo',
             textAlign: TextAlign.center,
             style: TextStyle(
+              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -146,6 +156,10 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         state = AppState.camera;
       },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -160,6 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
             'Identify Brick',
             textAlign: TextAlign.center,
             style: TextStyle(
+              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -188,6 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
             'Finish',
             textAlign: TextAlign.center,
             style: TextStyle(
+              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -215,11 +231,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: view.helpButton(context),
         leadingWidth: 75,
-        toolbarHeight: 100,
+        toolbarHeight: 75,
         title: view.appLogo(),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 232, 232, 232),
+        shadowColor: Colors.black,
         actions: [
           view.menuOptions(context),
         ],
@@ -235,10 +251,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   predictedLegoName,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'WorkSans'),
                 ),
               ],
             ),

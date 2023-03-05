@@ -21,21 +21,36 @@ class OnBoarding extends StatelessWidget {
             controller: controller,
             children: [
               Container(
-                color: const Color(0xffBDD4E7),
+                color: const Color.fromARGB(255, 236, 236, 236),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    const Image(image: AssetImage('assets/trans_logo.png')),
-                    Text(
-                      "Welcome to Brix Color Finder",
-                      style: Theme.of(context).textTheme.headline3,
-                      textAlign: TextAlign.center,
+                    const Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Image(
+                        image: AssetImage('assets/trans_logo.png'),
+                      ),
                     ),
                     const Text(
-                      "Swipe left to read the instructions on how to use the app, or click on the 'Skip boarding' button to access our cool features",
+                      "Welcome to Lego ID",
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                      ),
                       textAlign: TextAlign.center,
                     ),
-                    const Text("1/3"),
+                    const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text(
+                        "Swipe left to read the instructions on how to use the app, or click on the 'Skip boarding' button to access our cool features",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -73,18 +88,22 @@ class OnBoarding extends StatelessWidget {
                 },
                 child: const Text(
                   "Skip boarding",
-                  style: TextStyle(color: Color(0xff212227)),
+                  style: TextStyle(
+                    color: Color(0xff212227),
+                    fontFamily: 'WorkSans',
+                  ),
                 )),
           ),
           Positioned(
-              bottom: 10,
-              child: SmoothPageIndicator(
-                controller: controller,
-                count: 3,
-                onDotClicked: (index) => controller.animateToPage(index,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeIn),
-              ))
+            bottom: 10,
+            child: SmoothPageIndicator(
+              controller: controller,
+              count: 3,
+              onDotClicked: (index) => controller.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn),
+            ),
+          )
         ],
       ),
     );
