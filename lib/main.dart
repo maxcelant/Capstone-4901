@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
-import 'componants/on_boarding.dart';
+import 'components/on_boarding.dart';
 
 void main() {
   runApp(const MyApp());
