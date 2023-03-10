@@ -46,6 +46,8 @@ dependencies:
       ref: 783f15e5a87126159147d8ea30b98eea9207ac70
   image: ^3.0.2
   collection: ^1.15.0
+  flutter_spinkit: ^5.1.0
+  image_pixels: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,7 @@ flutter:
     - assets/lego_model.tflite
     - assets/labels.txt
     - assets/trans_logo.png
+    - assets/unidentified_lego.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -86,17 +89,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: fonts/WorkSans-Bold.ttf
+          weight: 700
+        - asset: fonts/WorkSans-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
