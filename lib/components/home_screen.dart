@@ -19,8 +19,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLoading = false;
   late String predictedLegoName = "";
+  late String predictedColor = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -146,13 +146,11 @@ class _MyHomePageState extends State<MyHomePage> {
   ElevatedButton _identifyBrickButton() {
     return ElevatedButton(
       onPressed: () async {
-        setState(() {
-          isLoading = true;
-        });
         String brickName = await cameraProcessor.predictImage();
+        //String color = await
         setState(() {
+          predictedColor = "";
           predictedLegoName = brickName;
-          isLoading = false;
         });
         state = AppState.camera;
       },
