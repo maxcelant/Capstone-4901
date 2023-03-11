@@ -91,11 +91,7 @@ class BrickIdentifier {
         .getMapWithFloatValue();
     final pred = getTopProbability(labeledProb);
 
-    print(pred.key);
-    print(pred.value);
-
     return pred.key; // returns name of the brick
-    // return Category(pred.key, pred.value);
   }
 
   void close() {
