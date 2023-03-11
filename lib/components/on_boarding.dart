@@ -59,8 +59,9 @@ class OnBoarding extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("fix me",
-                        style: Theme.of(context).textTheme.headline3),
+                    Text(
+                        "The aim of the application is really straight forward! Place your lego object on a not so colorful surface at least 7 inches away and take a photo",
+                        style: Theme.of(context).textTheme.displaySmall),
                     const Text("2/3"),
                   ],
                 ),
@@ -70,8 +71,9 @@ class OnBoarding extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("fix me",
-                          style: Theme.of(context).textTheme.headline3),
+                      Text(
+                          "Once youve taken your photo our intelligent algorith will help identify the type of Lego brick it is and the color",
+                          style: Theme.of(context).textTheme.displaySmall),
                       const Text("3/3"),
                     ]),
               )

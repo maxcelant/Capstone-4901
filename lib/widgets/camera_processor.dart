@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
-import 'package:image_pixels/image_pixels.dart';
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -43,27 +42,6 @@ class CameraProcessor {
     //   return retrieveError;
     // }
     if (_imageFile != null) {
-      return Semantics(
-        label: 'image_picker_example_picked_images',
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.file(_imageFile as File)),
-          ),
-        ),
       );
     } else if (_pickImageError != null) {
       return Text(
@@ -101,6 +79,8 @@ class CameraProcessor {
     return _previewImages();
   }
 
+  //End of working space ********************
+
   Center displayImageOnScreen(Future<void> Function() retrieveLostData) {
     return Center(
       child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
@@ -128,6 +108,7 @@ class CameraProcessor {
                     );
                   case ConnectionState.done:
                     return handlePreview();
+
                   default:
                     if (snapshot.hasError) {
                       return Text(
