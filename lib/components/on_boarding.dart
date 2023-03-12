@@ -60,7 +60,7 @@ class OnBoarding extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text("this app will allow you to identify many lego pieces",
-                        style: Theme.of(context).textTheme.headline3),
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const Text("scroll to the next page"),
                   ],
                 ),
@@ -72,8 +72,9 @@ class OnBoarding extends StatelessWidget {
                     children: [
                       Text(
                           "to increase the accuracy follow these instructions, ",
-                          style: Theme.of(context).textTheme.headline3),
-                      const Text("congratulations"),
+                          style: Theme.of(context).textTheme.headlineSmall),
+                      const Text(
+                          "congratulations you finished the tutorial, click on skip tutorial "), //
                     ]),
               )
             ],
