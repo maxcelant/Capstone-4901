@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
+import 'color_detection.dart';
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -42,6 +43,19 @@ class CameraProcessor {
     //   return retrieveError;
     // }
     if (_imageFile != null) {
+      return Column(
+        children: [
+          Semantics(
+            label: 'Image_picker_example_picked_images',
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.file(_imageFile as File),
+            ),
+          ),
+          color_detection(
+              key: ValueKey<String>(_imageFile!.path),
+              imagePath: _imageFile!.path),
+        ],
       );
     } else if (_pickImageError != null) {
       return Text(
