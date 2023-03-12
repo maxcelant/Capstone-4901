@@ -19,8 +19,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = false;
   late String predictedLegoName = "";
-  late String predictedColor = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -77,14 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         onImageButtonPressed(ImageSource.camera, context);
         state = AppState.crop;
-        // setState(() {
-        //   predictedLegoName = "";
-        // });
       },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -99,7 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
             'Take Photo',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -115,10 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
         onCropButtonPressed();
         state = AppState.identify;
       },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -133,7 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
             'Crop Photo',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -146,18 +133,16 @@ class _MyHomePageState extends State<MyHomePage> {
   ElevatedButton _identifyBrickButton() {
     return ElevatedButton(
       onPressed: () async {
-        String brickName = await cameraProcessor.predictImage();
-        //String color = await
         setState(() {
-          predictedColor = "";
+          isLoading = true;
+        });
+        String brickName = await cameraProcessor.predictImage();
+        setState(() {
           predictedLegoName = brickName;
+          isLoading = false;
         });
         state = AppState.camera;
       },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
@@ -172,7 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
             'Identify Brick',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -201,7 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
             'Finish',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'WorkSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -229,11 +212,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: view.helpButton(context),
         leadingWidth: 75,
-        toolbarHeight: 75,
+        toolbarHeight: 100,
         title: view.appLogo(),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 232, 232, 232),
-        shadowColor: Colors.black,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         actions: [
           view.menuOptions(context),
         ],
@@ -245,15 +228,17 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 cameraProcessor.displayImageOnScreen(retrieveLostData),
-                Text(
-                  predictedLegoName,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'WorkSans'),
-                ),
+                isLoading
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        predictedLegoName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
               ],
             ),
           ),

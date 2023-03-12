@@ -61,11 +61,30 @@ class CameraProcessor {
       return Text(
         'Pick image error: $_pickImageError',
         textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontFamily: 'WorkSans',
+        ),
       );
     } else {
-      return const Text(
-        'You have not yet picked an image.',
-        textAlign: TextAlign.center,
+      return Column(
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'You have not yet picked an image.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'WorkSans',
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+              ),
+            ),
+          ),
+          const Image(
+            image: AssetImage('assets/unidentified_lego.png'),
+          )
+        ],
       );
     }
   }
@@ -85,9 +104,21 @@ class CameraProcessor {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
-                    return const Text(
-                      'You have not yet picked an image.',
-                      textAlign: TextAlign.center,
+                    return Column(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          'Loading...',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: 'WorkSans',
+                          ),
+                        ),
+                        const Image(
+                          image: AssetImage('assets/unidentified_lego.png'),
+                        )
+                      ],
                     );
                   case ConnectionState.done:
                     return handlePreview();
@@ -99,9 +130,17 @@ class CameraProcessor {
                         textAlign: TextAlign.center,
                       );
                     } else {
-                      return const Text(
-                        'You have not yet picked an image.',
-                        textAlign: TextAlign.center,
+                      return Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'You have not yet picked an image.',
+                            textAlign: TextAlign.center,
+                          ),
+                          const Image(
+                            image: AssetImage('assets/unidentified_lego.png'),
+                          )
+                        ],
                       );
                     }
                 }
@@ -131,7 +170,7 @@ class CameraProcessor {
         uiSettings: [
           AndroidUiSettings(
               toolbarTitle: 'Cropper',
-              toolbarColor: Color.fromARGB(255, 17, 85, 195),
+              toolbarColor: Colors.orange,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false),

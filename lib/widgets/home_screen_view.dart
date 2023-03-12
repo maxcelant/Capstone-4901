@@ -5,7 +5,7 @@ class HomeScreenView {
     return const Image(
       image: AssetImage('assets/trans_logo.png'),
       fit: BoxFit.scaleDown,
-      height: 50,
+      height: 150,
     );
   }
 
@@ -28,7 +28,6 @@ class HomeScreenView {
                     "Help\n\nFor issues with image detection, ensure you're in a sufficiently well lit room!\n\nAvoid placing the bricks on colorful surfaces.\n\nFor faster results, ensure your internet connection is stable.\n\nHaving problems with our app? feel free to email us at themissingsemicolon@brixcolor.com and we'll get back to you as soon as possible.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'WorkSans',
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
@@ -70,7 +69,6 @@ class HomeScreenView {
                       label: const Text(
                         'Server Reconnect',
                         style: TextStyle(
-                          fontFamily: 'WorkSans',
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
