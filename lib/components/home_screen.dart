@@ -211,6 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // working on adding a take picture button along side all other buttons
   ElevatedButton _actionButton() {
     if (state == AppState.camera) {
       return _takePictureButton();
