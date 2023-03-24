@@ -11,6 +11,161 @@ class OnBoarding extends StatelessWidget {
     controller.dispose();
   }
 
+  Widget Snaptip1 = Container(
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/center.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(6.0),
+        child: const Text(
+          "Place the lego brick in the \ncenter of the frame.",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/no_side.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+    ]),
+  );
+
+  Widget Snaptip2 = Container(
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/bright.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(6.0),
+        child: const Text(
+          "Make sure the lego brick is \nwell-lit, and the image isn't \nblurry.",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/no_blur.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+    ]),
+  );
+
+  Widget Snaptip3 = Container(
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/single.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(6.0),
+        child: const Text(
+          "Make sure the picture        \nfeatures only one lego brick.",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/no_multiple.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+    ]),
+  );
+
+  Widget Snaptip4 = Container(
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/plain.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(6.0),
+        child: const Text(
+          "Place the lego brick against \na plain and contrasting \nbackground for better \nrecognition.",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/no_print.png',
+          height: 75,
+          width: 75,
+        ),
+      )
+    ]),
+  );
+
+  Widget Snaptip5 = Container(
+    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/complete.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(6.0),
+        child: const Text(
+          "Make sure the picture \nfeatures the entire lego brick.",
+          style: TextStyle(color: Colors.black, fontSize: 14),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.all(1.0),
+        padding: EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/no_cutoff.png',
+          height: 75,
+          width: 75,
+        ),
+      )
+    ]),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +176,7 @@ class OnBoarding extends StatelessWidget {
             controller: controller,
             children: [
               Container(
-                color: const Color.fromARGB(255, 236, 236, 236),
+                color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   // ignore: prefer_const_literals_to_create_immutables
@@ -29,11 +184,11 @@ class OnBoarding extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(20.0),
                       child: Image(
-                        image: AssetImage('assets/trans_logo.png'),
+                        image: AssetImage('assets/trans_logo2.png'),
                       ),
                     ),
                     const Text(
-                      "Welcome to Lego ID",
+                      "Welcome to Brix-Color Finder",
                       style: TextStyle(
                         fontFamily: 'WorkSans',
                         fontSize: 32,
@@ -55,25 +210,50 @@ class OnBoarding extends StatelessWidget {
                 ),
               ),
               Container(
-                color: const Color(0xff8693AB),
+                color: Colors.white,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                        "The aim of the application is really straight forward! Place your lego object on a not so colorful surface at least 7 inches away and take a photo",
-                        style: Theme.of(context).textTheme.displaySmall),
+                    Text("", style: Theme.of(context).textTheme.displaySmall),
+                    Text("", style: Theme.of(context).textTheme.displaySmall),
+                    const Text(""),
+                    const Text(
+                      "Identify Lego Bricks In 3 Easy Steps",
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Image.asset(
+                      'assets/onboard.gif',
+                      height: 600,
+                      width: 600,
+                    ),
                     const Text("2/3"),
                   ],
                 ),
               ),
               Container(
-                color: const Color(0xffAAB9CF),
+                color: Colors.white,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                          "Once youve taken your photo our intelligent algorith will help identify the type of Lego brick it is and the color",
-                          style: Theme.of(context).textTheme.displaySmall),
+                      Text("", style: Theme.of(context).textTheme.displaySmall),
+                      const Text(
+                        "Snap Tips",
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Snaptip1,
+                      Snaptip2,
+                      Snaptip3,
+                      Snaptip4,
+                      Snaptip5,
                       const Text("3/3"),
                     ]),
               )
