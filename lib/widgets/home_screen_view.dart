@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomeScreenView {
   Image appLogo() {
     return const Image(
-      image: AssetImage('assets/trans_logo.png'),
+      image: AssetImage('assets/trans_logo2.png'),
       fit: BoxFit.scaleDown,
       height: 50,
     );
