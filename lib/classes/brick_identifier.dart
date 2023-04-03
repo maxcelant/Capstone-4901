@@ -20,14 +20,11 @@ class BrickIdentifier {
 
   final String _labelsFileName = 'assets/labels.txt';
 
-  final int _labelsLength = 1001;
+  final int _labelsLength = 46;
 
   late var _probabilityProcessor;
 
   late List<String> labels;
-
-  NormalizeOp preProcessNormalizeOp = NormalizeOp(127.5, 127.5);
-  NormalizeOp postProcessNormalizeOp = NormalizeOp(0, 1);
 
   BrickIdentifier({int? numThreads}) {
     _interpreterOptions = InterpreterOptions();
@@ -52,8 +49,7 @@ class BrickIdentifier {
       _outputType = interpreter.getOutputTensor(0).type;
 
       _outputBuffer = TensorBuffer.createFixedSize(_outputShape, _outputType);
-      _probabilityProcessor =
-          TensorProcessorBuilder().add(postProcessNormalizeOp).build();
+      _probabilityProcessor = TensorProcessorBuilder().build();
     } catch (e) {
       print('Unable to create interpreter, Caught Exception: ${e.toString()}');
     }
@@ -71,10 +67,9 @@ class BrickIdentifier {
   TensorImage _preProcess() {
     int cropSize = min(_inputImage.height, _inputImage.width);
     return ImageProcessorBuilder()
-        .add(ResizeWithCropOrPadOp(cropSize, cropSize))
+        // .add(ResizeWithCropOrPadOp(cropSize, cropSize))
         .add(ResizeOp(
             _inputShape[1], _inputShape[2], ResizeMethod.NEAREST_NEIGHBOUR))
-        .add(preProcessNormalizeOp)
         .build()
         .process(_inputImage);
   }
