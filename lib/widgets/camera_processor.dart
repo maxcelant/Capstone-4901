@@ -53,8 +53,11 @@ class CameraProcessor {
             ),
           ),
           color_detection(
-              key: ValueKey<String>(_imageFile!.path),
-              imagePath: _imageFile!.path),
+            key: ValueKey<String>(_imageFile!.path),
+            imagePath: _imageFile!.path,
+            xAxis: 100,
+            yAxis: 100,
+          ),
         ],
       );
     } else if (_pickImageError != null) {
