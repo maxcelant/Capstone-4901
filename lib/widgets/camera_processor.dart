@@ -38,10 +38,6 @@ class CameraProcessor {
 
   // Checks for errors and returns widget tree that displays image
   Widget _previewImages() {
-    // final Text? retrieveError = _getRetrieveErrorWidget();
-    // if (retrieveError != null) {
-    //   return retrieveError;
-    // }
     if (_imageFile != null) {
       return Column(
         children: [

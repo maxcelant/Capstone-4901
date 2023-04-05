@@ -22,8 +22,6 @@ class BrickIdentifier {
 
   final int _labelsLength = 46;
 
-  late var _probabilityProcessor;
-
   late List<String> labels;
 
   BrickIdentifier({int? numThreads}) {
@@ -49,7 +47,6 @@ class BrickIdentifier {
       _outputType = interpreter.getOutputTensor(0).type;
 
       _outputBuffer = TensorBuffer.createFixedSize(_outputShape, _outputType);
-      _probabilityProcessor = TensorProcessorBuilder().build();
     } catch (e) {
       print('Unable to create interpreter, Caught Exception: ${e.toString()}');
     }
@@ -67,9 +64,7 @@ class BrickIdentifier {
   TensorImage _preProcess() {
     int cropSize = min(_inputImage.height, _inputImage.width);
     return ImageProcessorBuilder()
-        // .add(ResizeWithCropOrPadOp(cropSize, cropSize))
-        .add(ResizeOp(
-            _inputShape[1], _inputShape[2], ResizeMethod.NEAREST_NEIGHBOUR))
+        .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
         .build()
         .process(_inputImage);
   }
@@ -82,10 +77,9 @@ class BrickIdentifier {
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
 
     Map<String, double> labeledProb = TensorLabel.fromList(
-            labels, _probabilityProcessor.process(_outputBuffer))
+            labels, TensorProcessorBuilder().build().process(_outputBuffer))
         .getMapWithFloatValue();
     final pred = getTopProbability(labeledProb);
-
     return pred.key; // returns name of the brick
   }
 
@@ -97,7 +91,6 @@ class BrickIdentifier {
 MapEntry<String, double> getTopProbability(Map<String, double> labeledProb) {
   var pq = PriorityQueue<MapEntry<String, double>>(compare);
   pq.addAll(labeledProb.entries);
-
   return pq.first;
 }
 

@@ -78,9 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         onImageButtonPressed(ImageSource.camera, context);
         state = AppState.crop;
-        // setState(() {
-        //   predictedLegoName = "";
-        // });
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -118,9 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             onImageButtonPressed(ImageSource.camera, context);
             state = AppState.crop;
-            // setState(() {
-            //   predictedLegoName = "";
-            // });
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -191,9 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           onImageButtonPressed(ImageSource.camera, context);
           state = AppState.crop;
-          // setState(() {
-          //   predictedLegoName = "";
-          // });
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -224,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ElevatedButton(
         onPressed: () async {
           String brickName = await cameraProcessor.predictImage();
-          //String color = await
+          //String color = await colorProcessor.predictColor();
           setState(() {
             predictedColor = "";
             predictedLegoName = brickName;
@@ -267,7 +258,6 @@ class _MyHomePageState extends State<MyHomePage> {
         state = AppState.camera;
       },
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.center,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Icon(
