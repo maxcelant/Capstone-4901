@@ -168,10 +168,12 @@ class CameraProcessor {
               toolbarTitle: 'Cropper',
               toolbarColor: Colors.orange,
               toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true),
           IOSUiSettings(
             title: 'Cropper',
+            aspectRatioLockEnabled: true,
+            aspectRatioPickerButtonHidden: true,
           ),
           WebUiSettings(
             context: context,
