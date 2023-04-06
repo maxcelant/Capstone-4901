@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2/components/on_boarding.dart';
 
 class HomeScreenView {
   Image appLogo() {
@@ -14,28 +15,9 @@ class HomeScreenView {
       label: "Help",
       child: IconButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 16,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
-                    "Help\n\nFor issues with image detection, ensure you're in a sufficiently well lit room!\n\nAvoid placing the bricks on colorful surfaces.\n\nFor faster results, ensure your internet connection is stable.\n\nHaving problems with our app? feel free to email us at themissingsemicolon@brixcolor.com and we'll get back to you as soon as possible.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              );
-            },
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OnBoarding()),
           );
         },
         iconSize: 40,

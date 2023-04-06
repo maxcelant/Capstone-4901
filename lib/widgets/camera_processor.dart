@@ -38,10 +38,6 @@ class CameraProcessor {
 
   // Checks for errors and returns widget tree that displays image
   Widget _previewImages() {
-    // final Text? retrieveError = _getRetrieveErrorWidget();
-    // if (retrieveError != null) {
-    //   return retrieveError;
-    // }
     if (_imageFile != null) {
       return Column(
         children: [
@@ -172,10 +168,12 @@ class CameraProcessor {
               toolbarTitle: 'Cropper',
               toolbarColor: Colors.orange,
               toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true),
           IOSUiSettings(
             title: 'Cropper',
+            aspectRatioLockEnabled: true,
+            aspectRatioPickerButtonHidden: true,
           ),
           WebUiSettings(
             context: context,
