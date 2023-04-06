@@ -74,181 +74,202 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Container _takePictureButton() {
     return Container(
-        child: ElevatedButton(
-      onPressed: () {
-        onImageButtonPressed(ImageSource.camera, context);
-        state = AppState.crop;
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const Icon(
-            Icons.camera,
-            size: 40,
-          ),
-          const SizedBox(
-              width: 20.0), // Add some space between the icon and text
-          const Text(
-            'Take Photo',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'WorkSans',
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+        height: 100,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ElevatedButton(
+            onPressed: () {
+              onImageButtonPressed(ImageSource.camera, context);
+              state = AppState.crop;
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Icon(
+                  Icons.camera,
+                  size: 40,
+                ),
+                const SizedBox(
+                    width: 20.0), // Add some space between the icon and text
+                const Text(
+                  'Take Photo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
+        ));
+  }
+
+  Container _cropPictureButton() {
+    return Container(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              onImageButtonPressed(ImageSource.camera, context);
+              state = AppState.crop;
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              minimumSize: MaterialStateProperty.all<Size>(const Size(0, 60)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Icon(
+                  Icons.camera,
+                  size: 25,
+                ),
+                const SizedBox(
+                    width: 20.0), // Add some space between the icon and text
+                const Text(
+                  'Retake Photo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10.0),
+          ElevatedButton(
+            onPressed: () {
+              onCropButtonPressed();
+              state = AppState.identify;
+            },
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.deepOrange),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              minimumSize: MaterialStateProperty.all<Size>(const Size(0, 60)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Icon(
+                  Icons.crop,
+                  size: 25,
+                ),
+                const SizedBox(
+                    width: 20.0), // Add some space between the icon and text
+                const Text(
+                  'Crop Photo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     ));
   }
 
-  Container _cropPictureButton() {
-    return Container(
-        child: Row(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            onImageButtonPressed(ImageSource.camera, context);
-            state = AppState.crop;
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              const Icon(
-                Icons.camera,
-                size: 25,
-              ),
-              const SizedBox(
-                  width: 20.0), // Add some space between the icon and text
-              const Text(
-                'Retake Photo',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'WorkSans',
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            onCropButtonPressed();
-            state = AppState.identify;
-          },
-          style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.deepOrange),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              const Icon(
-                Icons.crop,
-                size: 25,
-              ),
-              const SizedBox(
-                  width: 20.0), // Add some space between the icon and text
-              const Text(
-                'Crop Photo',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'WorkSans',
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    ));
-  }
-
   Container _identifyBrickButton() {
     return Container(
-        child: Row(children: [
-      ElevatedButton(
-        onPressed: () {
-          onImageButtonPressed(ImageSource.camera, context);
-          state = AppState.crop;
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        ),
-        child: Row(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(
-              Icons.camera,
-              size: 27,
-            ),
-            const SizedBox(
-                width: 10.0), // Add some space between the icon and text
-            const Text(
-              'Retake Photo',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'WorkSans',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            ElevatedButton(
+              onPressed: () {
+                onImageButtonPressed(ImageSource.camera, context);
+                state = AppState.crop;
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(0, 60)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const Icon(
+                    Icons.camera,
+                    size: 27,
+                  ),
+                  const SizedBox(
+                      width: 10.0), // Add some space between the icon and text
+                  const Text(
+                    'Retake Photo',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-      ElevatedButton(
-        onPressed: () async {
-          String brickName = await cameraProcessor.predictImage();
-          //String color = await colorProcessor.predictColor();
-          setState(() {
-            predictedColor = "";
-            predictedLegoName = brickName;
-          });
-          state = AppState.camera;
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const Icon(
-              Icons.search,
-              size: 27,
-            ),
-            const SizedBox(
-                width: 10.0), // Add some space between the icon and text
-            const Text(
-              'Identify Brick',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'WorkSans',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            SizedBox(height: 10.0),
+            ElevatedButton(
+              onPressed: () async {
+                String brickName = await cameraProcessor.predictImage();
+                //String color = await colorProcessor.predictColor();
+                setState(() {
+                  predictedColor = "";
+                  predictedLegoName = brickName;
+                });
+                state = AppState.camera;
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(0, 60)),
               ),
-            ),
-          ],
-        ),
-      )
-    ]));
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const Icon(
+                    Icons.search,
+                    size: 27,
+                  ),
+                  const SizedBox(
+                      width: 10.0), // Add some space between the icon and text
+                  const Text(
+                    'Identify Brick',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ]),
+    ));
   }
 
   Container _finishedButton() {
@@ -257,6 +278,8 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         state = AppState.camera;
       },
+      style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all<Size>(const Size(0, 50))),
       child: Row(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
@@ -326,16 +349,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: 100,
-            padding: const EdgeInsets.all(16.0),
-            child: Material(
-              // elevation: 5.0,
-              borderRadius: BorderRadius.circular(30.0),
-              child: _actionButton(),
-            ),
-          )
+          _actionButton(),
         ],
       ),
       // floatingActionButton: _actionButton(),
