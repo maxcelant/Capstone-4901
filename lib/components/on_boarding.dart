@@ -13,13 +13,16 @@ class OnBoarding extends StatelessWidget {
 
   Widget Snaptip1 = Container(
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/center.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(2.0),
+          padding: EdgeInsets.all(2.0),
+          child: Image.asset(
+            'assets/center.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
       Container(
@@ -30,27 +33,32 @@ class OnBoarding extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_side.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/no_side.png',
+            height: 75,
+            width: 75,
+          ),
         ),
-      ),
+      )
     ]),
   );
 
   Widget Snaptip2 = Container(
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/bright.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/bright.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
       Container(
@@ -61,13 +69,16 @@ class OnBoarding extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_blur.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/no_blur.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
     ]),
@@ -75,13 +86,16 @@ class OnBoarding extends StatelessWidget {
 
   Widget Snaptip3 = Container(
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/single.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/single.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
       Container(
@@ -92,13 +106,16 @@ class OnBoarding extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_multiple.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/no_multiple.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
     ]),
@@ -106,13 +123,16 @@ class OnBoarding extends StatelessWidget {
 
   Widget Snaptip4 = Container(
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/plain.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/plain.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
       Container(
@@ -123,27 +143,33 @@ class OnBoarding extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_print.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/no_print.png',
+            height: 75,
+            width: 75,
+          ),
         ),
-      )
+      ),
     ]),
   );
 
   Widget Snaptip5 = Container(
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/complete.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/complete.png',
+            height: 75,
+            width: 75,
+          ),
         ),
       ),
       Container(
@@ -154,15 +180,18 @@ class OnBoarding extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_cutoff.png',
-          height: 75,
-          width: 75,
+      Expanded(
+        //Flexible(
+        child: Container(
+          margin: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.0),
+          child: Image.asset(
+            'assets/no_cutoff.png',
+            height: 75,
+            width: 75,
+          ),
         ),
-      )
+      ),
     ]),
   );
 
@@ -199,7 +228,7 @@ class OnBoarding extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(12.0),
                       child: Text(
-                        "Swipe left to read the instructions on how to use the app, or click on the 'Skip boarding' button to access our cool features",
+                        "Swipe left to learn how to use the app. click on the 'Skip boarding' to skip! \n happy learning!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'WorkSans',
@@ -209,29 +238,31 @@ class OnBoarding extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Text("", style: Theme.of(context).textTheme.displaySmall),
-                    Text("", style: Theme.of(context).textTheme.displaySmall),
-                    const Text(""),
-                    const Text(
-                      "Identify Lego Bricks In 3 Easy Steps",
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
+              Expanded(
+                //Flexible(
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Text("", style: Theme.of(context).textTheme.displaySmall),
+                      Text("", style: Theme.of(context).textTheme.displaySmall),
+                      // To do : fill up page and fix the alignment issue
+                      const Text(
+                        "Identify Lego Bricks In 3 Easy Steps",
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Image.asset(
-                      'assets/onboard.gif',
-                      height: 600,
-                      width: 600,
-                    ),
-                    const Text("2/3"),
-                  ],
+                      Image.asset(
+                        'assets/onboard.gif',
+                        height: 630, // fix position
+                        width: 630,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
