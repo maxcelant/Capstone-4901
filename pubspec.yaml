@@ -45,11 +45,10 @@ dependencies:
     git:
       url: https://github.com/filofan1/tflite_flutter_helper.git
       ref: 783f15e5a87126159147d8ea30b98eea9207ac70
-  
+
   collection: ^1.15.0
   flutter_spinkit: ^5.1.0
   colornames: ^0.1.0
-
 
 dev_dependencies:
   flutter_test:
