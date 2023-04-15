@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:image_pixels/image_pixels.dart';
 
-class color_detection extends StatelessWidget {
+class ColorDetection extends StatelessWidget {
   final String imagePath;
 
-  const color_detection({required Key key, required this.imagePath})
+  const ColorDetection({required Key key, required this.imagePath})
       : super(key: key);
 
   @override
@@ -21,23 +21,4 @@ class color_detection extends StatelessWidget {
           return Text('Lego color is: $color}');
         });
   }
-
-  // String getColorName(Color color) {
-  //   if (color == Colors.black) {
-  //     return 'Black';
-  //   } else if (color == Colors.white) {
-  //     return 'White';
-  //   } else if (color == Colors.red) {
-  //     return 'Red';
-  //   } else if (color == Colors.green) {
-  //     return 'Green';
-  //   } else if (color == Colors.blue) {
-  //     return 'Blue';
-  //   } else {
-  //     return color.toString();
-  //   }
-  // }
 }
-
-
-// Text("Image Color is ${img.pixelColorAt!(xAxis, yAxis)}"),

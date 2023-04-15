@@ -1,5 +1,4 @@
-import 'dart:math';
-
+//import 'dart:math';
 import 'package:image/image.dart';
 import 'package:collection/collection.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -39,6 +38,7 @@ class BrickIdentifier {
     try {
       interpreter = await Interpreter.fromAsset('lego_model.tflite',
           options: _interpreterOptions);
+      //ignore_for_file: avoid_print
       print('Interpreter Created Successfully');
 
       _inputShape = interpreter.getInputTensor(0).shape;
@@ -62,7 +62,7 @@ class BrickIdentifier {
   }
 
   TensorImage _preProcess() {
-    int cropSize = min(_inputImage.height, _inputImage.width);
+    // int cropSize = min(_inputImage.height, _inputImage.width);
     return ImageProcessorBuilder()
         .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
         .build()
