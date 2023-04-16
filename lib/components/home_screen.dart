@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'dart:io';
-
+//import '../widgets/color_identifier.dart';
 import '../widgets/home_screen_view.dart';
 import '../widgets/camera_processor.dart';
 
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // TODO: figure this out
+  // Figure this out! ~ Max Comment
   //Retrieves lost images and updates file list accordingly
   Future<void> retrieveLostData() async {
     // final LostDataResponse response = await cameraProcessor.getLostData();
@@ -111,9 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
-  Container _cropPictureButton() {
-    return Container(
-        child: Padding(
+  Widget _cropPictureButton() {
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           ElevatedButton(
             onPressed: () {
               onCropButtonPressed();
@@ -187,12 +186,11 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-    ));
+    );
   }
 
-  Container _identifyBrickButton() {
-    return Container(
-        child: Padding(
+  Padding _identifyBrickButton() {
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -230,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () async {
                 String brickName = await cameraProcessor.predictImage();
@@ -269,27 +267,27 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           ]),
-    ));
+    );
   }
 
-  Container _finishedButton() {
-    return Container(
-        child: ElevatedButton(
+  ElevatedButton _finishedButton() {
+    return ElevatedButton(
       onPressed: () {
         state = AppState.camera;
       },
       style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all<Size>(const Size(0, 50))),
+        minimumSize: MaterialStateProperty.all<Size>(const Size(0, 50)),
+      ),
       child: Row(
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const Icon(
+        children: const [
+          Icon(
             Icons.check,
             size: 40,
           ),
-          const SizedBox(
-              width: 20.0), // Add some space between the icon and text
-          const Text(
+          SizedBox(
+            width: 20.0,
+          ),
+          Text(
             'Finish',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -300,18 +298,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-    ));
+    );
   }
 
   Container _actionButton() {
     if (state == AppState.camera) {
       return _takePictureButton();
     } else if (state == AppState.crop) {
-      return _cropPictureButton();
+      return Container(child: _cropPictureButton());
     } else if (state == AppState.identify) {
-      return _identifyBrickButton(); // Add color detection here
+      return Container(
+          child: _identifyBrickButton()); // Add color detection here
     } else {
-      return _finishedButton();
+      return Container(child: _finishedButton());
     }
   }
 
@@ -324,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
         toolbarHeight: 75,
         title: view.appLogo(),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 232, 232, 232),
+        backgroundColor: const Color.fromARGB(255, 232, 232, 232),
         shadowColor: Colors.black,
         actions: [
           view.menuOptions(context),

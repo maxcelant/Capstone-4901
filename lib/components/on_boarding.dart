@@ -11,11 +11,12 @@ class OnBoarding extends StatelessWidget {
     controller.dispose();
   }
 
-  Widget Snaptip1 = Container(
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+  Widget snaptip1 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/center.png',
           height: 75,
@@ -23,61 +24,61 @@ class OnBoarding extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(20.0),
-        padding: EdgeInsets.all(6.0),
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
         child: const Text(
           "Place the lego brick in the \ncenter of the frame.",
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/no_side.png',
           height: 75,
           width: 75,
         ),
       ),
-    ]),
+    ],
   );
 
-  Widget Snaptip2 = Container(
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/bright.png',
-          height: 75,
-          width: 75,
-        ),
+  Widget snaptip2 =
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+    Container(
+      margin: const EdgeInsets.all(1.0),
+      padding: const EdgeInsets.all(1.0),
+      child: Image.asset(
+        'assets/bright.png',
+        height: 75,
+        width: 75,
       ),
-      Container(
-        margin: EdgeInsets.all(20.0),
-        padding: EdgeInsets.all(6.0),
-        child: const Text(
-          "Make sure the lego brick is \nwell-lit, and the image isn't \nblurry.",
-          style: TextStyle(color: Colors.black, fontSize: 14),
-        ),
+    ),
+    Container(
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(6.0),
+      child: const Text(
+        "Make sure the lego brick is \nwell-lit, and the image isn't \nblurry.",
+        style: TextStyle(color: Colors.black, fontSize: 14),
       ),
-      Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
-        child: Image.asset(
-          'assets/no_blur.png',
-          height: 75,
-          width: 75,
-        ),
+    ),
+    Container(
+      margin: const EdgeInsets.all(1.0),
+      padding: const EdgeInsets.all(1.0),
+      child: Image.asset(
+        'assets/no_blur.png',
+        height: 75,
+        width: 75,
       ),
-    ]),
-  );
+    ),
+  ]);
 
-  Widget Snaptip3 = Container(
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+  Widget snaptip3 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/single.png',
           height: 75,
@@ -85,30 +86,31 @@ class OnBoarding extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(20.0),
-        padding: EdgeInsets.all(6.0),
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
         child: const Text(
           "Make sure the picture        \nfeatures only one lego brick.",
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/no_multiple.png',
           height: 75,
           width: 75,
         ),
       ),
-    ]),
+    ],
   );
 
-  Widget Snaptip4 = Container(
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+  Widget snaptip4 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/plain.png',
           height: 75,
@@ -116,30 +118,31 @@ class OnBoarding extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(20.0),
-        padding: EdgeInsets.all(6.0),
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
         child: const Text(
           "Place the lego brick against \na plain and contrasting \nbackground for better \nrecognition.",
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/no_print.png',
           height: 75,
           width: 75,
         ),
       )
-    ]),
+    ],
   );
 
-  Widget Snaptip5 = Container(
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+  Widget snaptip5 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/complete.png',
           height: 75,
@@ -147,23 +150,23 @@ class OnBoarding extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(20.0),
-        padding: EdgeInsets.all(6.0),
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
         child: const Text(
           "Make sure the picture \nfeatures the entire lego brick.",
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       ),
       Container(
-        margin: EdgeInsets.all(1.0),
-        padding: EdgeInsets.all(1.0),
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
         child: Image.asset(
           'assets/no_cutoff.png',
           height: 75,
           width: 75,
         ),
       )
-    ]),
+    ],
   );
 
   @override
@@ -249,11 +252,11 @@ class OnBoarding extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Snaptip1,
-                      Snaptip2,
-                      Snaptip3,
-                      Snaptip4,
-                      Snaptip5,
+                      snaptip1,
+                      snaptip2,
+                      snaptip3,
+                      snaptip4,
+                      snaptip5,
                       const Text("3/3"),
                     ]),
               )
