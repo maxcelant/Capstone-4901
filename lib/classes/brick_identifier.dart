@@ -20,7 +20,7 @@ class BrickIdentifier {
 
   final String _labelsFileName = 'assets/labels.txt';
 
-  final int _labelsLength = 46;
+  final int _labelsLength = 16;
 
   late List<String> labels;
 
