@@ -18,9 +18,9 @@ class BrickIdentifier {
   late TfLiteType _inputType;
   late TfLiteType _outputType;
 
-  final String _labelsFileName = 'assets/labels.txt';
+  final String _labelsFileName = 'assets/labels3.txt';
 
-  final int _labelsLength = 16;
+  final int _labelsLength = 13;
 
   late List<String> labels;
 
@@ -37,7 +37,7 @@ class BrickIdentifier {
 
   Future<void> loadModel() async {
     try {
-      interpreter = await Interpreter.fromAsset('lego_model.tflite',
+      interpreter = await Interpreter.fromAsset('lego_model_3.tflite',
           options: _interpreterOptions);
       print('Interpreter Created Successfully');
 
