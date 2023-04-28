@@ -77,7 +77,10 @@ flutter:
   assets:
     - assets/
     - assets/lego_model.tflite
+    - assets/lego_model_1.tflite
+    - assets/lego_model_3.tflite
     - assets/labels.txt
+    - assets/labels3.txt
     - assets/trans_logo.png
     - assets/unidentified_lego.png
 

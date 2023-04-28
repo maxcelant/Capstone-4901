@@ -1,4 +1,5 @@
-//import 'dart:math';
+import 'dart:math';
+
 import 'package:image/image.dart';
 import 'package:collection/collection.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -17,9 +18,9 @@ class BrickIdentifier {
   late TfLiteType _inputType;
   late TfLiteType _outputType;
 
-  final String _labelsFileName = 'assets/labels.txt';
+  final String _labelsFileName = 'assets/labels3.txt';
 
-  final int _labelsLength = 46;
+  final int _labelsLength = 13;
 
   late List<String> labels;
 
@@ -36,7 +37,7 @@ class BrickIdentifier {
 
   Future<void> loadModel() async {
     try {
-      interpreter = await Interpreter.fromAsset('lego_model.tflite',
+      interpreter = await Interpreter.fromAsset('lego_model_3.tflite',
           options: _interpreterOptions);
       //ignore_for_file: avoid_print
       print('Interpreter Created Successfully');
@@ -62,18 +63,24 @@ class BrickIdentifier {
   }
 
   TensorImage _preProcess() {
-    // int cropSize = min(_inputImage.height, _inputImage.width);
-    return ImageProcessorBuilder()
+    int cropSize = min(_inputImage.height, _inputImage.width);
+    ImageProcessor processor = ImageProcessorBuilder()
         .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
-        .build()
-        .process(_inputImage);
+        .add(NormalizeOp(0.0, 255.0)) // Add normalization operation
+        .build();
+    _inputImage = processor.process(_inputImage);
+
+    return _inputImage;
   }
 
   String predict(Image image) {
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
     _inputImage = _preProcess();
-
+    // Float32List imgArray = _inputImage.buffer.asFloat32List();
+    // for (int i = 0; i < imgArray.length; i++) {
+    //   print(imgArray[i]);
+    // }
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
 
     Map<String, double> labeledProb = TensorLabel.fromList(
