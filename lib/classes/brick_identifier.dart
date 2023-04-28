@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:image/image.dart';
 import 'package:collection/collection.dart';
@@ -40,6 +39,7 @@ class BrickIdentifier {
     try {
       interpreter = await Interpreter.fromAsset('lego_model_3.tflite',
           options: _interpreterOptions);
+      //ignore_for_file: avoid_print
       print('Interpreter Created Successfully');
 
       _inputShape = interpreter.getInputTensor(0).shape;
