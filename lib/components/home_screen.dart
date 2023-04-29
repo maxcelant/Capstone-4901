@@ -21,6 +21,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late String predictedLegoName = "";
   late String predictedColor = "";
+  late String predictedAccuracy = "";
+  late String resultString = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -81,6 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               onImageButtonPressed(ImageSource.camera, context);
               state = AppState.crop;
+              setState(() {
+                predictedColor = "";
+                predictedLegoName = "";
+                resultString = "";
+              });
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -231,11 +238,15 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () async {
-                String brickName = await cameraProcessor.predictImage();
+                final pred = await cameraProcessor.predictImage();
+                String brickName = pred.key;
+                double accuracy = pred.value * 100;
                 //String color = await colorProcessor.predictColor();
                 setState(() {
                   predictedColor = "";
                   predictedLegoName = brickName;
+                  predictedAccuracy = accuracy.toStringAsFixed(2);
+                  resultString = "$predictedLegoName - $predictedAccuracy%";
                 });
                 state = AppState.camera;
               },
@@ -337,11 +348,11 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 cameraProcessor.displayImageOnScreen(retrieveLostData),
                 Text(
-                  predictedLegoName,
+                  resultString,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 32,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'WorkSans'),
                 ),
