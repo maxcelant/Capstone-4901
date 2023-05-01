@@ -232,6 +232,8 @@ class OnBoarding extends StatelessWidget {
                       'assets/onboard.gif',
                       height: 600,
                       width: 600,
+                      semanticLabel:
+                          "take a picture\n crop the picture\n upload the picture\n view results",
                     ),
                     const Text("2/3"),
                   ],
