@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_2/classes/brick_identifier.dart';
+import 'package:flutter_app_2/widgets/color_identifier.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
-//import 'color_detection.dart';
+import 'package:image_pixels/image_pixels.dart';
+import 'dart:ui' as ui;
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -53,6 +56,9 @@ class CameraProcessor {
           //   key: ValueKey<String>(_imageFile!.path),
           //   imagePath: _imageFile!.path,
           // ),
+          // ImageColorName(
+          //     imagePath: _imageFile!.path,
+          //     key: ValueKey<String>(_imageFile!.path))
         ],
       );
     } else if (_pickImageError != null) {
@@ -207,5 +213,21 @@ class CameraProcessor {
   Future<String> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
+  }
+
+  // Image color processor
+  Future<String> predictColor() async {
+    img.Image image = (await fileToImage())!;
+    final int x = image.width ~/ 2;
+    final int y = image.height ~/ 2;
+    String pixelColor = "";
+    ImagePixels(
+        imageProvider: MemoryImage(image.getBytes()),
+        builder: (BuildContext context, image) {
+          final color = image.pixelColorAt!(x, y);
+          pixelColor = "Color is $color";
+          return Text(pixelColor);
+        });
+    return pixelColor;
   }
 }

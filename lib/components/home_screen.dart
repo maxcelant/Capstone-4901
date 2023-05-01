@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2/widgets/color_identifier.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'dart:io';
-//import '../widgets/color_identifier.dart';
 import '../widgets/home_screen_view.dart';
 import '../widgets/camera_processor.dart';
 
@@ -21,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late String predictedLegoName = "";
   late String predictedColor = "";
+  bool _showImageColorName = false;
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -232,10 +233,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () async {
                 String brickName = await cameraProcessor.predictImage();
-                //String color = await colorProcessor.predictColor();
+                String colorName = await cameraProcessor.predictColor();
+                // String color = await colorProcessor.predictColor();
                 setState(() {
-                  predictedColor = "";
+                  predictedColor = colorName;
                   predictedLegoName = brickName;
+                  _showImageColorName = true;
                 });
                 state = AppState.camera;
               },
@@ -265,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-            )
+            ),
           ]),
     );
   }
@@ -341,7 +344,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 32,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'WorkSans'),
                 ),
