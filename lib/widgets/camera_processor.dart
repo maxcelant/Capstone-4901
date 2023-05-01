@@ -204,7 +204,7 @@ class CameraProcessor {
   }
 
   // Processes the file and then returns the name of the brick
-  Future<String> predictImage() async {
+  Future<MapEntry<String, double>> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
   }

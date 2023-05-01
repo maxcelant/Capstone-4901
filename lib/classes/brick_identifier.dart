@@ -18,9 +18,9 @@ class BrickIdentifier {
   late TfLiteType _inputType;
   late TfLiteType _outputType;
 
-  final String _labelsFileName = 'assets/labels3.txt';
+  final String _labelsFileName = 'assets/labels.txt';
 
-  final int _labelsLength = 13;
+  final int _labelsLength = 46;
 
   late List<String> labels;
 
@@ -37,7 +37,7 @@ class BrickIdentifier {
 
   Future<void> loadModel() async {
     try {
-      interpreter = await Interpreter.fromAsset('lego_model_3.tflite',
+      interpreter = await Interpreter.fromAsset('lego_model.tflite',
           options: _interpreterOptions);
       //ignore_for_file: avoid_print
       print('Interpreter Created Successfully');
@@ -65,6 +65,7 @@ class BrickIdentifier {
   TensorImage _preProcess() {
     int cropSize = min(_inputImage.height, _inputImage.width);
     ImageProcessor processor = ImageProcessorBuilder()
+        .add(ResizeWithCropOrPadOp(cropSize, cropSize))
         .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
         .add(NormalizeOp(0.0, 255.0)) // Add normalization operation
         .build();
@@ -73,7 +74,7 @@ class BrickIdentifier {
     return _inputImage;
   }
 
-  String predict(Image image) {
+  MapEntry<String, double> predict(Image image) {
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
     _inputImage = _preProcess();
@@ -87,7 +88,7 @@ class BrickIdentifier {
             labels, TensorProcessorBuilder().build().process(_outputBuffer))
         .getMapWithFloatValue();
     final pred = getTopProbability(labeledProb);
-    return pred.key; // returns name of the brick
+    return pred; // returns name of the brick
   }
 
   void close() {
