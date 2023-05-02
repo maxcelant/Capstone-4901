@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2/components/on_boarding.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenView {
   Image appLogo() {
     return const Image(
-      image: AssetImage('assets/trans_logo2.png'),
+      image: AssetImage('assets/trans_logo3.png'),
       fit: BoxFit.scaleDown,
       height: 50,
     );
+  }
+
+  _launchURLSD() async {
+    const url = 'https://engineering.unt.edu/capstone';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _launchURLCE() async {
+    const url = 'https://engineering.unt.edu/';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Semantics helpButton(BuildContext context) {
@@ -14,28 +36,9 @@ class HomeScreenView {
       label: "Help",
       child: IconButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 16,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
-                    "Help\n\nFor issues with image detection, ensure you're in a sufficiently well lit room!\n\nAvoid placing the bricks on colorful surfaces.\n\nFor faster results, ensure your internet connection is stable.\n\nHaving problems with our app? feel free to email us at themissingsemicolon@brixcolor.com and we'll get back to you as soon as possible.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              );
-            },
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OnBoarding()),
           );
         },
         iconSize: 40,
@@ -63,12 +66,17 @@ class HomeScreenView {
                   shrinkWrap: true,
                   children: <Widget>[
                     const SizedBox(height: 20),
-                    const Center(child: Text('Settings')),
+                    const Center(
+                        child: Text(
+                      'Connect with us',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
                     const SizedBox(height: 20),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: _launchURLSD,
                       label: const Text(
-                        'Server Reconnect',
+                        'Visit Senior Design Website',
                         style: TextStyle(
                           fontFamily: 'WorkSans',
                           fontSize: 15,
@@ -76,7 +84,26 @@ class HomeScreenView {
                         ),
                       ),
                       icon: const Icon(
-                        Icons.cloud_upload_rounded,
+                        Icons.link,
+                        size: 24.0,
+                      ),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        alignment: Alignment.centerLeft,
+                      ),
+                    ),
+                    TextButton.icon(
+                      onPressed: _launchURLCE,
+                      label: const Text(
+                        'Visit College of Engineering Website',
+                        style: TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.link,
                         size: 24.0,
                       ),
                       style: TextButton.styleFrom(

@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
-import 'color_detection.dart';
+//import 'color_detection.dart';
 
 class CameraProcessor {
   File? _imageFile; // user's picture
   dynamic _pickImageError;
   bool isVideo = false;
-  String? _retrieveDataError;
+  //String? _retrieveDataError;
   final ImagePicker _picker = ImagePicker();
   BrickIdentifier brickIdentifier = BrickIdentifier();
 
@@ -29,7 +29,7 @@ class CameraProcessor {
   }
 
   void setRetrieveDataError(String err) {
-    _retrieveDataError = err;
+    //_retrieveDataError = err;
   }
 
   Future<LostDataResponse> getLostData() async {
@@ -38,23 +38,21 @@ class CameraProcessor {
 
   // Checks for errors and returns widget tree that displays image
   Widget _previewImages() {
-    // final Text? retrieveError = _getRetrieveErrorWidget();
-    // if (retrieveError != null) {
-    //   return retrieveError;
-    // }
     if (_imageFile != null) {
       return Column(
         children: [
           Semantics(
-            label: 'Image_picker_example_picked_images',
+            label: 'Image to identify',
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.file(_imageFile as File),
             ),
           ),
-          color_detection(
-              key: ValueKey<String>(_imageFile!.path),
-              imagePath: _imageFile!.path),
+          // The color_detection widget implementation was here****
+          // ColorDetection(
+          //   key: ValueKey<String>(_imageFile!.path),
+          //   imagePath: _imageFile!.path,
+          // ),
         ],
       );
     } else if (_pickImageError != null) {
@@ -150,14 +148,14 @@ class CameraProcessor {
     );
   }
 
-  Text? _getRetrieveErrorWidget() {
-    if (_retrieveDataError != null) {
-      final Text result = Text(_retrieveDataError!);
-      _retrieveDataError = null;
-      return result;
-    }
-    return null;
-  }
+  // Text? _getRetrieveErrorWidget() {
+  //   if (_retrieveDataError != null) {
+  //     final Text result = Text(_retrieveDataError!);
+  //     _retrieveDataError = null;
+  //     return result;
+  //   }
+  //   return null;
+  // }
 
   // Widget for cropping the image
   Future<CroppedFile?> getCroppedFile(BuildContext context) async {
@@ -172,10 +170,12 @@ class CameraProcessor {
               toolbarTitle: 'Cropper',
               toolbarColor: Colors.orange,
               toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true),
           IOSUiSettings(
             title: 'Cropper',
+            aspectRatioLockEnabled: true,
+            aspectRatioPickerButtonHidden: true,
           ),
           WebUiSettings(
             context: context,
@@ -204,7 +204,7 @@ class CameraProcessor {
   }
 
   // Processes the file and then returns the name of the brick
-  Future<String> predictImage() async {
+  Future<MapEntry<String, double>> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
   }

@@ -20,14 +20,9 @@ class BrickIdentifier {
 
   final String _labelsFileName = 'assets/labels.txt';
 
-  final int _labelsLength = 1001;
-
-  late var _probabilityProcessor;
+  final int _labelsLength = 46;
 
   late List<String> labels;
-
-  NormalizeOp preProcessNormalizeOp = NormalizeOp(127.5, 127.5);
-  NormalizeOp postProcessNormalizeOp = NormalizeOp(0, 1);
 
   BrickIdentifier({int? numThreads}) {
     _interpreterOptions = InterpreterOptions();
@@ -44,6 +39,7 @@ class BrickIdentifier {
     try {
       interpreter = await Interpreter.fromAsset('lego_model.tflite',
           options: _interpreterOptions);
+      //ignore_for_file: avoid_print
       print('Interpreter Created Successfully');
 
       _inputShape = interpreter.getInputTensor(0).shape;
@@ -52,8 +48,6 @@ class BrickIdentifier {
       _outputType = interpreter.getOutputTensor(0).type;
 
       _outputBuffer = TensorBuffer.createFixedSize(_outputShape, _outputType);
-      _probabilityProcessor =
-          TensorProcessorBuilder().add(postProcessNormalizeOp).build();
     } catch (e) {
       print('Unable to create interpreter, Caught Exception: ${e.toString()}');
     }
@@ -70,28 +64,31 @@ class BrickIdentifier {
 
   TensorImage _preProcess() {
     int cropSize = min(_inputImage.height, _inputImage.width);
-    return ImageProcessorBuilder()
+    ImageProcessor processor = ImageProcessorBuilder()
         .add(ResizeWithCropOrPadOp(cropSize, cropSize))
-        .add(ResizeOp(
-            _inputShape[1], _inputShape[2], ResizeMethod.NEAREST_NEIGHBOUR))
-        .add(preProcessNormalizeOp)
-        .build()
-        .process(_inputImage);
+        .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
+        .add(NormalizeOp(0.0, 255.0)) // Add normalization operation
+        .build();
+    _inputImage = processor.process(_inputImage);
+
+    return _inputImage;
   }
 
-  String predict(Image image) {
+  MapEntry<String, double> predict(Image image) {
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
     _inputImage = _preProcess();
-
+    // Float32List imgArray = _inputImage.buffer.asFloat32List();
+    // for (int i = 0; i < imgArray.length; i++) {
+    //   print(imgArray[i]);
+    // }
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
 
     Map<String, double> labeledProb = TensorLabel.fromList(
-            labels, _probabilityProcessor.process(_outputBuffer))
+            labels, TensorProcessorBuilder().build().process(_outputBuffer))
         .getMapWithFloatValue();
     final pred = getTopProbability(labeledProb);
-
-    return pred.key; // returns name of the brick
+    return pred; // returns name of the brick
   }
 
   void close() {
@@ -102,7 +99,6 @@ class BrickIdentifier {
 MapEntry<String, double> getTopProbability(Map<String, double> labeledProb) {
   var pq = PriorityQueue<MapEntry<String, double>>(compare);
   pq.addAll(labeledProb.entries);
-
   return pq.first;
 }
 
