@@ -229,7 +229,7 @@ class OnBoarding extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Image.asset(
-                      'assets/onboard.gif',
+                      'assets/onboard2.gif',
                       height: 600,
                       width: 600,
                       semanticLabel:
