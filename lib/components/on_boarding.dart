@@ -229,9 +229,11 @@ class OnBoarding extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Image.asset(
-                      'assets/onboard.gif',
+                      'assets/onboard2.gif',
                       height: 600,
                       width: 600,
+                      semanticLabel:
+                          "take a picture\n crop the picture\n upload the picture\n view results",
                     ),
                     const Text("2/3"),
                   ],

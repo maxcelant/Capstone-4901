@@ -42,7 +42,7 @@ class CameraProcessor {
       return Column(
         children: [
           Semantics(
-            label: 'Image_picker_example_picked_images',
+            label: 'Image to identify',
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.file(_imageFile as File),
