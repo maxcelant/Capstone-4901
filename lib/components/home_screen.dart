@@ -59,28 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void processData(String brickName, double accuracy){
+  void processData(String brickName, double accuracy) {
     // If the accuracy is too low, don't process it and display it
     if (accuracy > 75.0) {
       setState(() {
         Brick brick = Brick(
-          image: cameraProcessor.getImage(), 
-          name: brickName, 
-          color: "blue", // todo: this is just a default value for testing
-          accuracy: "${accuracy.toStringAsFixed(2)}%");
-        resultString = brick.getResult();
+            image: cameraProcessor.getImage(),
+            name: brickName,
+            color: "blue", // todo: this is just a default value for testing
+            accuracy: "${accuracy.toStringAsFixed(2)}%");
+        resultString = brick.getNameResult();
         addBrick(brick);
       });
       return;
     }
-    
+
     setState(() {
       resultString = "Brick could not be identified\nPlease try again";
     });
-    
   }
 
-  Future<void> retrieveLostData() async { }
+  Future<void> retrieveLostData() async {}
 
   Container _takePictureButton() {
     return Container(
