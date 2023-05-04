@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_2/classes/brick_identifier.dart';
 import 'package:flutter_app_2/widgets/color_identifier.dart';
+import 'package:flutter_app_2/classes/color_finder.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class CameraProcessor {
   //String? _retrieveDataError;
   final ImagePicker _picker = ImagePicker();
   BrickIdentifier brickIdentifier = BrickIdentifier();
-
+  ColorFinder colorFinder = ColorFinder();
   File? getImage() {
     return _imageFile;
   }
@@ -45,7 +46,7 @@ class CameraProcessor {
       return Column(
         children: [
           Semantics(
-            label: 'Image_picker_example_picked_images',
+            label: 'Image to identify',
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.file(_imageFile as File),
@@ -210,24 +211,14 @@ class CameraProcessor {
   }
 
   // Processes the file and then returns the name of the brick
-  Future<String> predictImage() async {
+  Future<MapEntry<String, double>> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
   }
 
   // Image color processor
-  Future<String> predictColor() async {
-    img.Image image = (await fileToImage())!;
-    final int x = image.width ~/ 2;
-    final int y = image.height ~/ 2;
-    String pixelColor = "";
-    ImagePixels(
-        imageProvider: MemoryImage(image.getBytes()),
-        builder: (BuildContext context, image) {
-          final color = image.pixelColorAt!(x, y);
-          pixelColor = "Color is $color";
-          return Text(pixelColor);
-        });
-    return pixelColor;
+  Future<MapEntry<String, double>> predictColor() async {
+    img.Image image = (await fileToImage()) as img.Image;
+    return colorFinder.predict(image);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_2/widgets/color_identifier.dart';
+// import 'package:flutter_app_2/widgets/color_identifier.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
@@ -21,7 +21,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late String predictedLegoName = "";
   late String predictedColor = "";
-  bool _showImageColorName = false;
+  late String predictedAccuracy = "";
+  late String predictedColorAccuracy = "";
+  late String brickNameAndAccuracy = "";
+  late String brickColorAndAccuracy = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
   var view = HomeScreenView();
@@ -82,6 +85,12 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               onImageButtonPressed(ImageSource.camera, context);
               state = AppState.crop;
+              setState(() {
+                predictedColor = "";
+                predictedLegoName = "";
+                brickNameAndAccuracy = "";
+                brickColorAndAccuracy = "";
+              });
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -232,13 +241,22 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () async {
-                String brickName = await cameraProcessor.predictImage();
-                String colorName = await cameraProcessor.predictColor();
+                final pred = await cameraProcessor.predictImage();
+                final colorPred = await cameraProcessor.predictColor();
+                String brickName = pred.key;
+                String brickColor = colorPred.key;
+                double accuracy = pred.value * 100;
+                double colorAccuracy = colorPred.value * 100;
+                // String colorName = await cameraProcessor.predictColor();
                 // String color = await colorProcessor.predictColor();
                 setState(() {
-                  predictedColor = colorName;
+                  predictedColor = brickColor;
                   predictedLegoName = brickName;
-                  _showImageColorName = true;
+                  predictedColorAccuracy = colorAccuracy.toStringAsFixed(2);
+                  predictedAccuracy = accuracy.toStringAsFixed(2);
+                  brickNameAndAccuracy =
+                      "$predictedLegoName - $predictedAccuracy%";
+                  brickColorAndAccuracy = "$predictedColor - $colorAccuracy%";
                 });
                 state = AppState.camera;
               },
@@ -334,22 +352,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                cameraProcessor.displayImageOnScreen(retrieveLostData),
-                Text(
-                  predictedLegoName,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'WorkSans'),
-                ),
-              ],
-            ),
+          cameraProcessor.displayImageOnScreen(retrieveLostData),
+          Text(
+            brickNameAndAccuracy,
+            style: const TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'WorkSans'),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            brickColorAndAccuracy,
+            style: const TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'WorkSans'),
+            textAlign: TextAlign.center,
           ),
           _actionButton(),
         ],
