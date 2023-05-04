@@ -1,0 +1,11 @@
+Black
+Brown
+Orange
+Pink
+Purple
+Yellow
+Blue
+Green
+Red
+Medium Blue
+Dark Grey

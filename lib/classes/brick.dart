@@ -15,6 +15,6 @@ class Brick {
       required this.accuracy});
 
   String getNameResult() {
-    return "$name - $accuracy";
+    return "$name - $color - $accuracy";
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_app_2/widgets/color_identifier.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'dart:io';
-//import '../widgets/color_identifier.dart';
 import '../widgets/home_screen_view.dart';
 import '../widgets/camera_processor.dart';
 import '../classes/brick.dart';
@@ -59,14 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void processData(String brickName, double accuracy) {
+  void processData(String brickName, String brickColor, double accuracy) {
     // If the accuracy is too low, don't process it and display it
     if (accuracy > 75.0) {
       setState(() {
         Brick brick = Brick(
             image: cameraProcessor.getImage(),
             name: brickName,
-            color: "blue", // todo: this is just a default value for testing
+            color: brickColor, // todo: this is just a default value for testing
             accuracy: "${accuracy.toStringAsFixed(2)}%");
         resultString = brick.getNameResult();
         addBrick(brick);
@@ -244,9 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () async {
                 final pred = await cameraProcessor.predictImage();
+                final colorPred = await cameraProcessor.predictColor();
                 String brickName = pred.key;
+                String brickColor = colorPred.key;
                 double accuracy = pred.value * 100;
-                processData(brickName, accuracy);
+                processData(brickName, brickColor, accuracy);
                 //String color = await colorProcessor.predictColor();
                 state = AppState.camera;
               },
@@ -276,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-            )
+            ),
           ]),
     );
   }
