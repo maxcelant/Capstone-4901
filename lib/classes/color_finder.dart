@@ -14,7 +14,7 @@ class ColorFinder {
   late List<int> _inputShape;
   late List<int> _outputShape;
   late List<String> labelColor;
-  final String _labelsFileName = 'assets/color_label_2.txt';
+  final String _colorLabelsFileName = 'assets/color_labels.txt';
   final int _labelsLength = 11;
 
   ColorFinder({int? numThreads}) {
@@ -29,7 +29,7 @@ class ColorFinder {
 
   Future<void> loadModel() async {
     try {
-      interpreter = await Interpreter.fromAsset('model_unquant.tflite',
+      interpreter = await Interpreter.fromAsset('lego_color_model.tflite',
           options: _interpreterOptions);
       //ignore_for_file: avoid_print
       print('Color Interpreter Created Successfully');
@@ -48,7 +48,7 @@ class ColorFinder {
 
   // A future that loads the labels from our color label file
   Future<void> loadLabels() async {
-    labelColor = await FileUtil.loadLabels(_labelsFileName);
+    labelColor = await FileUtil.loadLabels(_colorLabelsFileName);
     if (labelColor.length == _labelsLength) {
       print('Color labels loaded successfully');
     } else {
@@ -81,7 +81,6 @@ class ColorFinder {
     final predictedColor = getTopProbability(labelProb);
 
     print(predictedColor.key);
-
     return predictedColor;
   }
 
@@ -94,6 +93,23 @@ MapEntry<String, double> getTopProbability(Map<String, double> labelProb) {
   var pq = PriorityQueue<MapEntry<String, double>>(compare);
   pq.addAll(labelProb.entries);
   return pq.first;
+}
+
+List<MapEntry<String, double>> getTopNProbability(
+    Map<String, double> labelProb, int n) {
+  var pq = PriorityQueue<MapEntry<String, double>>(compare);
+  pq.addAll(labelProb.entries);
+
+  List<MapEntry<String, double>> topN = [];
+  for (int i = 0; i < n; i++) {
+    if (pq.isNotEmpty) {
+      topN.add(pq.removeFirst());
+    } else {
+      break;
+    }
+  }
+
+  return topN;
 }
 
 int compare(MapEntry<String, double> e1, MapEntry<String, double> e2) {

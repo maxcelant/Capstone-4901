@@ -59,14 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void processData(String brickName, double accuracy) {
+  void processData(String brickName, String brickColor, double accuracy) {
     // If the accuracy is too low, don't process it and display it
     if (accuracy > 75.0) {
       setState(() {
         Brick brick = Brick(
             image: cameraProcessor.getImage(),
             name: brickName,
-            color: "blue", // todo: this is just a default value for testing
+            color: brickColor, // todo: this is just a default value for testing
             accuracy: "${accuracy.toStringAsFixed(2)}%");
         resultString = brick.getNameResult();
         addBrick(brick);
@@ -248,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 String brickName = pred.key;
                 String brickColor = colorPred.key;
                 double accuracy = pred.value * 100;
-                processData(brickName, accuracy);
+                processData(brickName, brickColor, accuracy);
                 //String color = await colorProcessor.predictColor();
                 state = AppState.camera;
               },
@@ -345,24 +345,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          cameraProcessor.displayImageOnScreen(retrieveLostData),
-          Text(
-            brickNameAndAccuracy,
-            style: const TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'WorkSans'),
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            brickColorAndAccuracy,
-            style: const TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'WorkSans'),
-            textAlign: TextAlign.center,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                cameraProcessor.displayImageOnScreen(retrieveLostData),
+                Text(
+                  resultString,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'WorkSans'),
+                ),
+              ],
+            ),
           ),
           _actionButton(),
         ],
