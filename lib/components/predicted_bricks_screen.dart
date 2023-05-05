@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../classes/brick.dart';
 
-
 class PredictedBricksScreen extends StatelessWidget {
   final List<Brick> legoCache;
 
@@ -41,7 +40,7 @@ class PredictedBricksScreen extends StatelessWidget {
                     flex: 2,
                     child: Image.file(brick.image!, fit: BoxFit.cover),
                   ),
-                  SizedBox(width: 16.0),
+                  const SizedBox(width: 16.0),
                   Expanded(
                     flex: 3,
                     child: Column(
