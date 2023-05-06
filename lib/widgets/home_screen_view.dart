@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/components/on_boarding.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../classes/brick.dart';
 import '../components/predicted_bricks_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenView {
   Image appLogo() {
@@ -13,7 +13,18 @@ class HomeScreenView {
     );
   }
 
-  _launchURL(String url) async {
+  _launchURLSD() async {
+    const url = 'https://engineering.unt.edu/capstone';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _launchURLCE() async {
+    const url = 'https://engineering.unt.edu/';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -34,6 +45,25 @@ class HomeScreenView {
         },
         iconSize: 40,
         icon: const Icon(Icons.help),
+        color: Colors.black,
+        tooltip: "Help",
+      ),
+    );
+  }
+
+  Semantics predictedCacheButton(BuildContext context, List<Brick> legoCache) {
+    return Semantics(
+      label: "Predicted Lego Bricks",
+      child: IconButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PredictedBricksScreen(legoCache)),
+          );
+        },
+        iconSize: 40,
+        icon: const Icon(Icons.history),
         color: Colors.black,
         tooltip: "Help",
       ),

@@ -89,6 +89,8 @@ flutter:
     - assets/color_labels.txt
     - assets/model_unquant.tflite
     - assets/color_label_2.txt
+    - assets/color_label_3.txt
+    - assets/Color_model_3.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
