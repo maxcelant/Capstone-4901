@@ -89,7 +89,7 @@ class OnBoarding extends StatelessWidget {
 
       ),
     ),
-  ]);
+  );
 
 
   Widget Snaptip3 = Container(
