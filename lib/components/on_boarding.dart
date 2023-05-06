@@ -27,8 +27,8 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.all(6.0),
         child: const Text(
-          "Place the lego brick in the \ncenter of the frame.",
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          "Position the lego brick at \nthe center of the frame.",
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       Container(
@@ -58,8 +58,8 @@ class OnBoarding extends StatelessWidget {
       margin: const EdgeInsets.all(20.0),
       padding: const EdgeInsets.all(6.0),
       child: const Text(
-        "Make sure the lego brick is \nwell-lit, and the image isn't \nblurry.",
-        style: TextStyle(color: Colors.black, fontSize: 14),
+        "Ensure that the LEGO brick \nis adequately illuminated \nand that the image is free \nof blurring.",
+        style: TextStyle(color: Colors.black, fontSize: 16),
       ),
     ),
     Container(
@@ -89,8 +89,8 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.all(6.0),
         child: const Text(
-          "Make sure the picture        \nfeatures only one lego brick.",
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          "Make sure the picture        \nfeatures only 1 lego brick.",
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       Container(
@@ -122,7 +122,7 @@ class OnBoarding extends StatelessWidget {
         padding: const EdgeInsets.all(6.0),
         child: const Text(
           "Place the lego brick against \na plain and contrasting \nbackground for better \nrecognition.",
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       Container(
@@ -153,8 +153,8 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.all(6.0),
         child: const Text(
-          "Make sure the picture \nfeatures the entire lego brick.",
-          style: TextStyle(color: Colors.black, fontSize: 14),
+          "Make sure the picture \nfeatures the entire LEGO.   ",
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       Container(
@@ -169,6 +169,74 @@ class OnBoarding extends StatelessWidget {
     ],
   );
 
+  Widget feature1 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Container(
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/center.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
+        child: const Text(
+          "Help: Redirects to onboarding pages to \nguide you take better pictures.",
+          style: TextStyle(color: Colors.black, fontSize: 16),
+        ),
+      ),
+    ],
+  );
+
+  Widget feature2 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Container(
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/center.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
+        child: const Text(
+          "History: View the recent properly           \nidentified bricks.",
+          style: TextStyle(color: Colors.black, fontSize: 16),
+        ),
+      ),
+    ],
+  );
+
+  Widget feature3 = Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Container(
+        margin: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(1.0),
+        child: Image.asset(
+          'assets/center.png',
+          height: 75,
+          width: 75,
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(6.0),
+        child: const Text(
+          "Connect: Visit the UNT CSE             \nEngineering website for more               \ninformation.",
+          style: TextStyle(color: Colors.black, fontSize: 16),
+        ),
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,9 +268,9 @@ class OnBoarding extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(11.0),
                       child: Text(
-                        "Swipe left to read the instructions on how to use the app, or click on the 'Skip boarding' button to access our cool features",
+                        "Swipe left to read the instructions on how to use the app.  Click on the 'Skip boarding' button to access our app features",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'WorkSans',
@@ -235,7 +303,7 @@ class OnBoarding extends StatelessWidget {
                       semanticLabel:
                           "take a picture\n crop the picture\n upload the picture\n view results",
                     ),
-                    const Text("2/3"),
+                    const Text("2/4"),
                   ],
                 ),
               ),
@@ -248,9 +316,9 @@ class OnBoarding extends StatelessWidget {
                       const Text(
                         "Snap Tips",
                         style: TextStyle(
-                          fontFamily: 'WorkSans',
+                          fontFamily: 'Roboto Mono',
                           fontSize: 32,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -259,9 +327,32 @@ class OnBoarding extends StatelessWidget {
                       snaptip3,
                       snaptip4,
                       snaptip5,
-                      const Text("3/3"),
+                      const Text("3/4"),
                     ]),
-              )
+              ),
+              Container(
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Text("", style: Theme.of(context).textTheme.displaySmall),
+                    const Text(
+                      "Features",
+                      style: TextStyle(
+                        fontFamily: 'Roboto Mono',
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    feature1,
+                    feature2,
+                    feature3,
+                    const Text("4/4"),
+                  ],
+                ),
+              ),
             ],
           ),
           Positioned(
@@ -285,7 +376,7 @@ class OnBoarding extends StatelessWidget {
             bottom: 10,
             child: SmoothPageIndicator(
               controller: controller,
-              count: 3,
+              count: 4,
               onDotClicked: (index) => controller.animateToPage(index,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeIn),
