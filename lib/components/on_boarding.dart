@@ -176,7 +176,7 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(1.0),
         padding: const EdgeInsets.all(1.0),
         child: Image.asset(
-          'assets/center.png',
+          'assets/help.png',
           height: 75,
           width: 75,
         ),
@@ -199,7 +199,7 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(1.0),
         padding: const EdgeInsets.all(1.0),
         child: Image.asset(
-          'assets/center.png',
+          'assets/history.png',
           height: 75,
           width: 75,
         ),
@@ -222,7 +222,7 @@ class OnBoarding extends StatelessWidget {
         margin: const EdgeInsets.all(1.0),
         padding: const EdgeInsets.all(1.0),
         child: Image.asset(
-          'assets/center.png',
+          'assets/menu.png',
           height: 75,
           width: 75,
         ),
