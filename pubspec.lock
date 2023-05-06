@@ -146,7 +146,7 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: "2818f5233cf8fa5fc51f6d78ce0028feb4e7c18d0b6d40b57b91f366eea7e656"
+      sha256: "8ffe990dac54a4a5492747added38571a5ab474c8e5d196809ea08849c69b1bb"
       url: "https://pub.dev"
     source: hosted
     version: "2.0.13"
@@ -154,7 +154,7 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_spinkit
-      sha256: "77a2117c0517ff909221f3160b8eb20052ab5216107581168af574ac1f05dff8"
+      sha256: b39c753e909d4796906c5696a14daf33639a76e017136c8d82bf3e620ce5bb8e
       url: "https://pub.dev"
     source: hosted
     version: "5.2.0"
@@ -228,7 +228,7 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: a07e3c11aa998f37a5007ffb244f5584e096acbd5e2c7682048cf774598d5fce
+      sha256: "271e0448e82268b3fa1cb2a48e4a911cbc2135587123d7df8e7ca703c5b10da2"
       url: "https://pub.dev"
     source: hosted
     version: "0.8.6+11"
@@ -340,7 +340,7 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "3e58242edc02624f2c712e3f8bea88e0e341c4ae1abd3a6ff661318a3aefd829"
+      sha256: "2cec049d282c7f13c594b4a73976b0b4f2d7a1838a6dd5aaf7bd9719196bee86"
       url: "https://pub.dev"
     source: hosted
     version: "2.0.27"

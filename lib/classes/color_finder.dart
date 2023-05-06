@@ -14,8 +14,8 @@ class ColorFinder {
   late List<int> _inputShape;
   late List<int> _outputShape;
   late List<String> labelColor;
-  final String _colorLabelsFileName = 'assets/color_labels.txt';
-  final int _labelsLength = 11;
+  final String _colorLabelsFileName = 'assets/color_label_3.txt';
+  final int _labelsLength = 9;
 
   ColorFinder({int? numThreads}) {
     _interpreterOptions = InterpreterOptions();
@@ -29,7 +29,7 @@ class ColorFinder {
 
   Future<void> loadModel() async {
     try {
-      interpreter = await Interpreter.fromAsset('lego_color_model.tflite',
+      interpreter = await Interpreter.fromAsset('Color_model_3.tflite',
           options: _interpreterOptions);
       //ignore_for_file: avoid_print
       print('Color Interpreter Created Successfully');
@@ -61,7 +61,7 @@ class ColorFinder {
     ImageProcessor processor = ImageProcessorBuilder()
         .add(ResizeWithCropOrPadOp(cropSize, cropSize))
         .add(ResizeOp(_inputShape[1], _inputShape[2], ResizeMethod.BILINEAR))
-        .add(NormalizeOp(0.0, 255.0)) // Add normalization operation
+        .add(NormalizeOp(0.0, 224)) // Add normalization operation
         .build();
     _inputImage = processor.process(_inputImage);
 
@@ -80,7 +80,7 @@ class ColorFinder {
         .getMapWithFloatValue();
     final predictedColor = getTopProbability(labelProb);
 
-    print(predictedColor.key);
+    print(predictedColor);
     return predictedColor;
   }
 
