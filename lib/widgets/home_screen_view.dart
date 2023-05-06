@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/components/on_boarding.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../classes/brick.dart';
+import '../components/predicted_bricks_screen.dart';
 
 class HomeScreenView {
   Image appLogo() {
@@ -11,18 +13,7 @@ class HomeScreenView {
     );
   }
 
-  _launchURLSD() async {
-    const url = 'https://engineering.unt.edu/capstone';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _launchURLCE() async {
-    const url = 'https://engineering.unt.edu/';
+  _launchURL(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);

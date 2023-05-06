@@ -1,12 +1,16 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_2/classes/brick_identifier.dart';
+import 'package:flutter_app_2/widgets/color_identifier.dart';
+import 'package:flutter_app_2/classes/color_finder.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:image/image.dart' as img;
-//import 'color_detection.dart';
+import 'package:image_pixels/image_pixels.dart';
+import 'dart:ui' as ui;
 
 class CameraProcessor {
   File? _imageFile; // user's picture
@@ -15,7 +19,7 @@ class CameraProcessor {
   //String? _retrieveDataError;
   final ImagePicker _picker = ImagePicker();
   BrickIdentifier brickIdentifier = BrickIdentifier();
-
+  ColorFinder colorFinder = ColorFinder();
   File? getImage() {
     return _imageFile;
   }
@@ -53,6 +57,9 @@ class CameraProcessor {
           //   key: ValueKey<String>(_imageFile!.path),
           //   imagePath: _imageFile!.path,
           // ),
+          // ImageColorName(
+          //     imagePath: _imageFile!.path,
+          //     key: ValueKey<String>(_imageFile!.path))
         ],
       );
     } else if (_pickImageError != null) {
@@ -207,5 +214,11 @@ class CameraProcessor {
   Future<MapEntry<String, double>> predictImage() async {
     img.Image image = (await fileToImage()) as img.Image;
     return brickIdentifier.predict(image);
+  }
+
+  // Image color processor
+  Future<MapEntry<String, double>> predictColor() async {
+    img.Image image = (await fileToImage()) as img.Image;
+    return colorFinder.predict(image);
   }
 }

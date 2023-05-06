@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_app_2/widgets/color_identifier.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:async';
 import 'dart:io';
-//import '../widgets/color_identifier.dart';
 import '../widgets/home_screen_view.dart';
 import '../widgets/camera_processor.dart';
+import '../classes/brick.dart';
 
 enum AppState { camera, crop, identify, done }
 
@@ -19,9 +20,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late String predictedLegoName = "";
-  late String predictedColor = "";
-  late String predictedAccuracy = "";
+  List<Brick> legoCache = [];
   late String resultString = "";
   late AppState state;
   var cameraProcessor = CameraProcessor();
@@ -31,6 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     state = AppState.camera;
+  }
+
+  void addBrick(Brick brick) {
+    setState(() {
+      legoCache.insert(0, brick); // Add brick to front of list
+    });
   }
 
   Future<void> onImageButtonPressed(
@@ -54,25 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // Figure this out! ~ Max Comment
-  //Retrieves lost images and updates file list accordingly
-  Future<void> retrieveLostData() async {
-    // final LostDataResponse response = await cameraProcessor.getLostData();
-    // if (response.isEmpty) {
-    //   return;
-    // }
-    // if (response.file != null) {
-    //   setState(() {
-    //     if (response.files == null) {
-    //       cameraProcessor.setImageFileListFromFile(response.file);
-    //     } else {
-    //       cameraProcessor.setImageFileListFromList(response.files);
-    //     }
-    //   });
-    // } else {
-    //   cameraProcessor.setRetrieveDataError(response.exception!.code);
-    // }
+  void processData(String brickName, String brickColor, double accuracy) {
+    // If the accuracy is too low, don't process it and display it
+    if (accuracy > 75.0) {
+      setState(() {
+        Brick brick = Brick(
+            image: cameraProcessor.getImage(),
+            name: brickName,
+            color: brickColor, // todo: this is just a default value for testing
+            accuracy: "${accuracy.toStringAsFixed(2)}%");
+        resultString = brick.getNameResult();
+        addBrick(brick);
+      });
+      return;
+    }
+
+    setState(() {
+      resultString = "Brick could not be identified\nPlease try again";
+    });
   }
+
+  Future<void> retrieveLostData() async {}
 
   Container _takePictureButton() {
     return Container(
@@ -84,8 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
               onImageButtonPressed(ImageSource.camera, context);
               state = AppState.crop;
               setState(() {
-                predictedColor = "";
-                predictedLegoName = "";
                 resultString = "";
               });
             },
@@ -239,15 +244,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () async {
                 final pred = await cameraProcessor.predictImage();
+                final colorPred = await cameraProcessor.predictColor();
                 String brickName = pred.key;
+                String brickColor = colorPred.key;
                 double accuracy = pred.value * 100;
+                processData(brickName, brickColor, accuracy);
                 //String color = await colorProcessor.predictColor();
-                setState(() {
-                  predictedColor = "";
-                  predictedLegoName = brickName;
-                  predictedAccuracy = accuracy.toStringAsFixed(2);
-                  resultString = "$predictedLegoName - $predictedAccuracy%";
-                });
                 state = AppState.camera;
               },
               style: ButtonStyle(
@@ -276,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-            )
+            ),
           ]),
     );
   }
@@ -337,6 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: const Color.fromARGB(255, 232, 232, 232),
         shadowColor: Colors.black,
         actions: [
+          view.predictedCacheButton(context, legoCache),
           view.menuOptions(context),
         ],
       ),

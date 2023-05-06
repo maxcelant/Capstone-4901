@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'home_screen.dart';
+import '../classes/brick.dart';
+import '../components/predicted_bricks_screen.dart';
 
 class OnBoarding extends StatelessWidget {
   OnBoarding({Key? key}) : super(key: key);
@@ -272,7 +274,7 @@ class OnBoarding extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Image.asset(
-                      'assets/onboard.gif',
+                      'assets/onboard2.gif',
                       height: 600,
                       width: 600,
                       semanticLabel:

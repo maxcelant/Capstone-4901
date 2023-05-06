@@ -17,7 +17,7 @@ class ImageColorName extends StatefulWidget {
 class ImageColorNameState extends State<ImageColorName> {
   PaletteGenerator? _paletteGenerator;
   late Color _color;
-  late String _colorName;
+  late String _colorName = "";
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class ImageColorNameState extends State<ImageColorName> {
 
     MaterialColor? materialColor =
         Colors.primaries.firstWhereOrNull((element) => element == color);
-    return materialColor != null ? materialColor.toString() : "Unknown Color";
+    return materialColor?.toString() ?? "Unknown Color";
   }
 
   @override
